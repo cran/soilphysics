@@ -1,0 +1,19 @@
+# Exports
+export(criticalmoisture)
+export(maxbulkdensity)
+export(fitbusscher)
+export(fitsoilwater)
+export(getInitiallbc)
+export(maxcurv)
+export(soilwater)
+export(SSlbc)
+export(fitlbc)
+export(fun2form)
+export(liquidlimit)
+export(Rsq)
+export(Sindex)
+export(sigmaP)
+export(voidratio)
+
+# Imports
+import(utils,rpanel)
