@@ -6,7 +6,7 @@
 \description{
 Function to calculate the soil water content based on the
 van Genuchten's (1980) formula:
-\deqn{\theta = \theta_R + (\theta_S - \theta_S)(1 + (\alpha x)^n)^{-m}}
+\deqn{\theta = \theta_R + (\theta_S - \theta_R)(1 + (\alpha x)^n)^{-m}}
 }
 
 \usage{
@@ -35,7 +35,7 @@ hydraulic conductivity of unsaturated soils. \emph{Soil Science Society of
 America Journal}, 44:892-898.
 
 Mualem, Y. (1976). A new model for predicting the hydraulic conductivity
-of unsaturated porous media, \emph{Water Resource Research}, 12:513-522.
+of unsaturated porous media. \emph{Water Resources Research}, 12:513-522.
 }
 
 \author{

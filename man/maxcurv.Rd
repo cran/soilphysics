@@ -20,6 +20,7 @@ function of x.
 
 \value{
 A list of
+  \item{fun}{ the function of x. }
   \item{x0}{ the x critical value. }
   \item{y0}{ the y critical value. }
 }

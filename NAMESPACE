@@ -16,4 +16,10 @@ export(sigmaP)
 export(voidratio)
 
 # Imports
-import(utils,rpanel)
+import(utils, rpanel)
+importFrom(MASS, mvrnorm)
+
+# S3method
+S3method(print, criticalmoisture)
+S3method(print, maxcurv)
+S3method(print, S.index)

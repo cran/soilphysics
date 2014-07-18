@@ -38,11 +38,21 @@ function (x.range, fun, graph = TRUE, ...)
         lines(x = c(-1e+20, newx[ind]),
             y = c(newy[ind], newy[ind]), lty = 3)
     }
-    cat("\n          Maximum curvature point \n",
-        "\nfunction:", deparse(fun)[2],
-        "\ncritical x: ", newx[ind],
-        "\ncritical y: ", newy[ind], "\n")
-    out <- list(x0 = newx[ind], y0 = newy[ind])
+ 
+    out <- list(fun = deparse(fun)[2], x0 = newx[ind], y0 = newy[ind])
     class(out) <- "maxcurv"
-    invisible(out)
+    return(out)
+}
+
+
+# -------------------------------------------
+# print method
+print.maxcurv <- 
+function (x, digits = 4L, quote = TRUE, ...) 
+{
+    cat("\n          Maximum curvature point \n",
+        "\nfunction:", x$fun,
+        "\ncritical x: ", x$x0,
+        "\ncritical y: ", x$y0, "\n")
+    invisible(x)
 }

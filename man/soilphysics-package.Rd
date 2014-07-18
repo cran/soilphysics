@@ -6,25 +6,25 @@
 \title{ Soil Physical Analysis }
 
 \description{
-Basic and model-based soil physical analysis. 
+Basic and model-based soil physical analyses. 
 }
 
 \details{
 \tabular{ll}{
 Package: \tab soilphysics\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2013-12-28\cr
+Version: \tab 1.1\cr
+Date: \tab 2014-07-17\cr
 License: \tab GPL (>= 2)\cr
 }
 This package contains functions for modelling the soil water retention,
 the load bearing capacity and the penetration resistance. There are some useful
 and easy-to-use functions to perform parameter estimation of these models.
-Methods to obtain the preconsolidation stress are avaliable, such as Casagrande (1936) and so on.
+Methods to obtain the preconsolidation stress are available, such as Casagrande (1936) and so on.
 There is a function to determine the soil critical moisture and the maximum bulk density 
 for one or more samples, based on the Proctor (1933) compaction test. Also, others utilities like a
 function to calculate the soil liquid limit, the void ratio and to determine the maximum curvature
-point are avaliable.
+point are available.
 }
 
 \note{
@@ -62,7 +62,7 @@ Dexter, A. R. (2004). Soil physical quality Part I. Theory,
    and effects on root growth. \emph{Geoderma}, 120:201-214.
 
 Dias Junior, M. S. (1994). \emph{Compression of three soils under longterm
-   tillage and wheel traffic}. 1994. 114f. Ph.D. thesis - Michigan
+   tillage and wheel traffic}. 1994. 114p. Ph.D. Thesis - Michigan
    State University, East Lansing.
 
 Dias Junior, M. S.; Pierce, F. J. (1995). A simple procedure for
@@ -74,9 +74,9 @@ Genuchten, M.T. van. (1980) A closed form equation for predicting the
    America Journal}, 44:892-898.
 
 Mualem, Y. (1976) A new model for predicting the hydraulic conductivity
-   of unsaturated porous media. \emph{Water Resource Research}, 12:513-522.
+   of unsaturated porous media. \emph{Water Resources Research}, 12:513-522.
 
-Proctor, E. R. (1933). Design and constructionof rolled earth dams.
+Proctor, E. R. (1933). Design and construction of rolled earth dams.
    \emph{Eng. News Record}, 3:245-284, 286-289, 348-351, 372-376.
 
 Silva, A. P. et al. (2010). Indicadores da qualidade fisica do solo. In: Jong Van Lier, Q. (Ed).

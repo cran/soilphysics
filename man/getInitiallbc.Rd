@@ -19,7 +19,7 @@ for the Load Bearing Capacity model via \code{\link{SSlbc}}.
 
 \references{
 Dias Junior, M. S. (1994). \emph{Compression of three soils under longterm
-   tillage and wheel traffic}. 1994. 114f. Ph.D. thesis - Michigan
+   tillage and wheel traffic}. 1994. 114p. Ph.D. Thesis - Michigan
    State University, East Lansing.
 }
 

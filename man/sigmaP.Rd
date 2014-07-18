@@ -73,8 +73,8 @@ The standard values for the applied stress sequence are: 25, 50,
 }
 
 \examples{
-pres <- c(1, 12.2, 25, 50, 100, 200, 400, 800, 1600)
-VR <- c(1.50, 1.37, 1.28, 1.12, 0.79, 0.43, 0.02, -0.41, -0.89)
+pres <- c(1, 12.5, 25, 50, 100, 200, 400, 800, 1600)
+VR <- c(0.99, 0.97, 0.95, 0.89, 0.78, 0.61, 0.43, 0.23, 0.01)
 
 plot(VR ~ log10(pres), type = "b") # find the 'mcp'
 sigmaP(VR, pres, method = "casagrande", mcp = 1.6)

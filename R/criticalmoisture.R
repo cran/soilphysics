@@ -58,9 +58,18 @@ function(theta, Bd, samples = NULL, graph = TRUE, ...)
             col = seq(1, nsamp), cex = 0.7)
       }
    }
-   
-   cat("\n          Critical Moisture and Maximum Bulk Density \n\n")
-   print(out)
-   class(out) <- "criticalmoisture"
-   invisible(out)
+
+   out. <- list(table = out)
+   class(out.) <- "criticalmoisture"
+   return(out.)
+}
+
+
+# ------------------------------------
+# print method
+print.criticalmoisture <- function(x, ...)
+{
+    cat("\n          Critical Moisture and Maximum Bulk Density \n\n")
+    print(x$table)
+    invisible(x$table)
 }
