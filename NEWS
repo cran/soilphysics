@@ -1,4 +1,13 @@
 ------------------------------------------------
+                version 1.2
+
+* Documentation fixes
+* function llwr()
+* data set skp1994
+* automatic casagrande method in the function sigmaP()
+* a flow chart in the documentation of sigmaP()
+
+------------------------------------------------
                 version 1.1
 
 * Documentation fixes

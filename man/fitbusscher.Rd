@@ -7,7 +7,7 @@
 Function to self start the nonlinear Busscher's (1990) model for penetration
 resistance, i.e., \eqn{Pr = b0 * (\theta ^ {b1}) * (Bd ^ {b2})}. It creates initial
 estimates (by log-linearization) of the parameters b0, b1 and b2 and uses them
-to provide its least-squares estimates via \code{\link{nls}}.
+to provide its least-squares estimates through \code{\link{nls}}.
 }
 
 \usage{ fitbusscher(Pr, theta, Bd, ...) }

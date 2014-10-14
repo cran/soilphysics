@@ -2,10 +2,10 @@
 \alias{bulkDensity}
 \docType{data}
 
-\title{ Soil Bulk Density Dataset }
+\title{ Soil Bulk Density Data Set }
 
 \description{
-This dataset refers to five observations of soil bulk density and soil moisture per sample.
+This data set refers to five observations of soil bulk density and soil moisture per sample.
 There are four soil samples.
 }
 

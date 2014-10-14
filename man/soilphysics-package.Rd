@@ -13,8 +13,8 @@ Basic and model-based soil physical analyses.
 \tabular{ll}{
 Package: \tab soilphysics\cr
 Type: \tab Package\cr
-Version: \tab 1.1\cr
-Date: \tab 2014-07-17\cr
+Version: \tab 1.2\cr
+Date: \tab 2014-10-13\cr
 License: \tab GPL (>= 2)\cr
 }
 This package contains functions for modelling the soil water retention,
@@ -73,14 +73,24 @@ Genuchten, M.T. van. (1980) A closed form equation for predicting the
    hydraulic conductivity of unsaturated soils. \emph{Soil Science Society of
    America Journal}, 44:892-898.
 
+Leao et al. (2005). An Algorithm for Calculating the Least Limiting Water Range of Soils. 
+	\emph{Agronomy Journal}, 97:1210-1215.
+
+Leao et al. (2006). Least limiting water range: A potential indicator of changes in near-surface 
+	soil physical quality after the conversion of Brazilian Savanna into pasture. 
+	\emph{Soil & Tillage Research}, 88:279-285.
+
 Mualem, Y. (1976) A new model for predicting the hydraulic conductivity
    of unsaturated porous media. \emph{Water Resources Research}, 12:513-522.
 
 Proctor, E. R. (1933). Design and construction of rolled earth dams.
    \emph{Eng. News Record}, 3:245-284, 286-289, 348-351, 372-376.
 
-Silva, A. P. et al. (2010). Indicadores da qualidade fisica do solo. In: Jong Van Lier, Q. (Ed).
+Silva et al. (2010). Indicadores da qualidade fisica do solo. In: Jong Van Lier, Q. (Ed).
    \emph{Fisica do solo}. Vicosa (MG): Sociedade Brasileira de Ciencia do Solo. p.541-281.
+
+Silva et al. (1994). Characterization of the least limiting water range of soils. 
+	\emph{Soil Science Society of America Journal}, 58:1775-1781.
 
 Sowers, G. F. (1965). Consistency. In: BLACK, C.A. (Ed.). \emph{Methods of soil analysis}.
    Madison: American Society of Agronomy. Part 1, p.391-399. (Agronomy, 9).

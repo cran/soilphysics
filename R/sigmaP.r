@@ -22,10 +22,15 @@ function (voidratio, stress, n4VCL = 2, method = c("casagrande",
         axis(side = 1, at = xval, labels = 10^xval)
     }
     if (method == "casagrande") {
-        if (is.null(mcp)) 
-            stop("'mcp' must be defined for using 'casagrande' method!")
         fit <- lm(y ~ x + I(x^2) + I(x^3) + I(x^4), data = xy)
-        est <- coef(fit)
+        est <- as.double(coef(fit))
+        if (is.null(mcp)) {
+            est <- round(est, 3)
+            a0 <- est[1]; a1 <- est[2]; a2 <- est[3]; a3 <- est[4]; a4 <- est[5]
+            poli <- function(x) a0 + a1*x + a2*x^2 + a3*x^3 + a4*x^4
+            pmax <- maxcurv2(range(xy["x"]), poli)
+            mcp <- pmax$x0
+        }
         Xmax <- mcp
         Ymax <- predict(fit, newdata = data.frame(x = Xmax))
         b1.tan <- est[2] + 2 * est[3] * Xmax + 3 * est[4] * Xmax^2 + 
@@ -121,5 +126,28 @@ function (voidratio, stress, n4VCL = 2, method = c("casagrande",
     sigmaP <- as.vector(10^x0)
     cat("\nPreconsolidation stress:", sigmaP, "\n")
     cat("Method:", method, "\n")
+    if (method == "casagrande") cat("mcp:", mcp, "\n")
     invisible(sigmaP)
+}
+
+# simplified maxcurv
+maxcurv2 <- function (x.range, fun) 
+{
+    b <- lm(range(fun(x.range)) ~ x.range)$coef
+    newx <- seq(x.range[1], x.range[2], length.out = 2000)
+    newy <- fun(newx)
+    if (fun(x.range[1]) > fun(x.range[2])) {
+        si <- -1
+    } else {
+        si <- 1
+    }
+    pred.lm <- mean(fun(x.range)) - si * b[2] * mean(x.range) + 
+        si * b[2] * newx
+    delta <- NULL
+    for (i in 1:length(newy)) {
+        delta[i] <- abs(newy[i] - pred.lm[i])
+    }
+    ind <- which.max(delta)
+    out <- list(fun = deparse(fun)[2], x0 = newx[ind], y0 = newy[ind])
+    return(out)
 }

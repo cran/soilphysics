@@ -2,10 +2,10 @@
 \alias{compaction}
 \docType{data}
 
-\title{ Soil Compaction Dataset }
+\title{ Soil Compaction Data Set }
 
 \description{
-This dataset refers to physical soil variables related to soil compaction.
+This data set refers to physical soil variables related to soil compaction.
 }
 
 \usage{ data(compaction) }

@@ -35,6 +35,10 @@ to the intersection of the soil \emph{Virgin Compression Line} (VCL) with the x-
 Arvidsson & Keller (2004). \code{reg1}, \code{reg2}, \code{reg3} and \code{reg4} are regression methods that obtain the preconsolidation
 stress value as the intercept of the VCL and a regression line fitted with the first two, three, four and five points of the curve, respectively,
 as described by Dias Junior & Pierce (1995). \code{pacheco} is the method of Pacheco Silva (ABNT, 1990).
+
+You may follow the flowchart below to understand the determination of the preconsolidation stress through \code{sigmaP()}.
+
+\figure{sigmaPfluxo.png}{options: scale = 1.2}
 }
 
 \value{ \code{sigmaP} returns the preconsolidation stress value. }
