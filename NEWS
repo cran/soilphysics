@@ -1,4 +1,18 @@
 ------------------------------------------------
+                version 2.0
+
+* Documentation fixes
+* new argument (water.model) in the function llwr()
+* new graphic output and print.method for llwr()
+* R-squared for the models fitted in llwr()
+* R-squared for the models fitted in fitsoilwater(), fitsoilwater2(),
+	fitsoilwater3(), fitsoilwater5()
+* new functions: soilwater2(), fitsoilwater2(), soilwater3(), fitsoilwater3(), 
+	soilwater4(), fitsoilwater4(), soilwater5(), fitsoilwater5(), 
+	soilwater6(), fitsoilwater6(), hydraulicCutOff(),
+	hemc(), iwc()
+
+------------------------------------------------
                 version 1.2
 
 * Documentation fixes

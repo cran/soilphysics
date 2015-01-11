@@ -8,6 +8,8 @@ function (voidratio, stress, n4VCL = 2, method = c("casagrande",
     stopifnot(is.numeric(voidratio))
     stopifnot(is.numeric(stress))
     method <- match.arg(method)
+    #if (!is.null(mcp) & mcp < 0 || mcp > 3.2) 
+    #    stop("mcp must be a value between 0 and 3.2")
     x <- NULL
     xy <- sortedXyData(log10(stress), voidratio)
     if (n4VCL < 2) 

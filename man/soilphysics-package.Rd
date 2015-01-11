@@ -13,18 +13,21 @@ Basic and model-based soil physical analyses.
 \tabular{ll}{
 Package: \tab soilphysics\cr
 Type: \tab Package\cr
-Version: \tab 1.2\cr
-Date: \tab 2014-10-13\cr
+Version: \tab 2.0\cr
+Date: \tab 2015-10-01\cr
 License: \tab GPL (>= 2)\cr
 }
-This package contains functions for modelling the soil water retention,
-the load bearing capacity and the penetration resistance. There are some useful
-and easy-to-use functions to perform parameter estimation of these models.
-Methods to obtain the preconsolidation stress are available, such as Casagrande (1936) and so on.
-There is a function to determine the soil critical moisture and the maximum bulk density 
-for one or more samples, based on the Proctor (1933) compaction test. Also, others utilities like a
-function to calculate the soil liquid limit, the void ratio and to determine the maximum curvature
-point are available.
+Functions for modelling the load bearing capacity and the penetration resistance. The package
+allows one to model the soil water retention through six different models. There are some useful
+and easy-to-use functions to perform parameter estimation of these models. Methods to obtain the 
+preconsolidation stress are available, such as the standard of Casagrande (1936) and so on. It is 
+possible to quantify soil water availability for plants through the Least Limiting Water Range 
+approach as well as the Integral Water Capacity. Also, it is possible to determine the water suction 
+at the point of hydraulic cut-off. Moreover, users can deal with the high-energy-moisture-characteristics 
+(HEMC) methodology proposed by Pierson & Mulla (1989), which is used to analyze the aggregate stability. 
+There is a function to determine the soil critical moisture and the maximum bulk density for one or more 
+samples, based on the Proctor (1933) compaction test. Other utilities like a function to calculate the 
+soil liquid limit, the void ratio and to determine the maximum curvature point are available.
 }
 
 \note{
@@ -61,6 +64,12 @@ Dexter, A. R. (2004). Soil physical quality Part I. Theory,
    effects of soil texture, density, and organic matter,
    and effects on root growth. \emph{Geoderma}, 120:201-214.
 
+Dexter et al. (2008). A user-friendly water retention function that takes account of the textural
+	and structural pore spaces in soil. \emph{Geoderma}, 143:243-253.
+
+Dexter et al. (2012). Equilibrium, non-equilibrium and residual water: Consequences for soil
+	water retention. Geoderma, 177-178: 63-71.
+
 Dias Junior, M. S. (1994). \emph{Compression of three soils under longterm
    tillage and wheel traffic}. 1994. 114p. Ph.D. Thesis - Michigan
    State University, East Lansing.
@@ -73,6 +82,9 @@ Genuchten, M.T. van. (1980) A closed form equation for predicting the
    hydraulic conductivity of unsaturated soils. \emph{Soil Science Society of
    America Journal}, 44:892-898.
 
+Groenevelt & Grant (2004). A newmodel for the soil-water retention curve that solves the problem 
+	of residualwater contents. \emph{European Journal of Soil Science}, 55:479-485.
+
 Leao et al. (2005). An Algorithm for Calculating the Least Limiting Water Range of Soils. 
 	\emph{Agronomy Journal}, 97:1210-1215.
 
@@ -83,8 +95,14 @@ Leao et al. (2006). Least limiting water range: A potential indicator of changes
 Mualem, Y. (1976) A new model for predicting the hydraulic conductivity
    of unsaturated porous media. \emph{Water Resources Research}, 12:513-522.
 
+Pierson, F.B.; Mulla, D.J. (1989) An Improved Method for Measuring Aggregate Stability
+of a Weakly Aggregated Loessial Soil. \emph{Soil Sci. Soc. Am. J.}, 53:1825--1831.
+
 Proctor, E. R. (1933). Design and construction of rolled earth dams.
    \emph{Eng. News Record}, 3:245-284, 286-289, 348-351, 372-376.
+
+Ross et al. (1991). Equation for extending water-retention curves to dryness.
+	\emph{Soil Science Society of America Journal}, 55:923-927. 
 
 Silva et al. (2010). Indicadores da qualidade fisica do solo. In: Jong Van Lier, Q. (Ed).
    \emph{Fisica do solo}. Vicosa (MG): Sociedade Brasileira de Ciencia do Solo. p.541-281.

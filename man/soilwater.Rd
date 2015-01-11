@@ -1,7 +1,7 @@
 \name{soilwater}
 \alias{soilwater}
 
-\title{ Soil Water Retention }
+\title{ Soil Water Retention, based on the van Genuchten's (1980) formula }
 
 \description{
 Function to calculate the soil water content based on the

@@ -4,8 +4,7 @@
 \title{ Interactive Estimation of van Genuchten's (1980) Model Parameters }
 
 \description{
-This function consists in an interactive graphical adjustment of the soil
-water retention curve via van Genuchten's (1980) formula.
+An interactive graphical adjustment of the soil water retention curve via van Genuchten's (1980) formula.
 The nonlinear least-squares estimates can be achieved taking the graphical initial
 values.
 }

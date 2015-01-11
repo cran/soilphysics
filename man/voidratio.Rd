@@ -26,8 +26,8 @@ voidratio(wetsoil, drysoil, diam.cylinder, height.cylinder,
 \seealso{ \code{\link{sigmaP}} }
 
 \examples{
-def <- c(0.1, 17, 30, 51, 97, 145, 201, 260, 325) / 100
-pres <- c(1, 12.2, 25, 50, 100, 200, 400, 800, 1600)
+def <- c(0.10, 0.12, 0.13, 0.15, 0.20, 0.26, 0.34, 0.43, 0.52)
+pres <- c(1, 12.5, 25, 50, 100, 200, 400, 800, 1600)
 VR <- voidratio(147.66, 118.13, 6.4, 3.4, 2.7, def)
 VR
 plot(VR ~ log10(pres), xaxt = "n", type = "b",
