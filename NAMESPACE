@@ -26,10 +26,13 @@ export(soilwater5)
 export(fitsoilwater5)
 export(hemc)
 export(iwc)
+export(simSigmaP)
+export(plotCIsigmaP)
 
 # Imports
 import(utils, rpanel)
 importFrom(MASS, mvrnorm)
+importFrom(tcltk, tkProgressBar, setTkProgressBar)
 
 # S3method
 S3method(print, criticalmoisture)
@@ -37,3 +40,4 @@ S3method(print, maxcurv)
 S3method(print, S.index)
 S3method(print, llwr)
 S3method(print, hemc)
+S3method(print, sigmaP)

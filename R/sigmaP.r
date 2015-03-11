@@ -1,5 +1,5 @@
 sigmaP <- 
-function (voidratio, stress, n4VCL = 2, method = c("casagrande", 
+function (voidratio, stress, n4VCL = 3, method = c("casagrande", 
     "VCLzero", "reg1", "reg2", "reg3", "reg4", "pacheco"), mcp = NULL, 
     graph = TRUE, ...) 
 {
@@ -12,27 +12,31 @@ function (voidratio, stress, n4VCL = 2, method = c("casagrande",
     #    stop("mcp must be a value between 0 and 3.2")
     x <- NULL
     xy <- sortedXyData(log10(stress), voidratio)
+
+    # VCL
     if (n4VCL < 2) 
         stop("'n4VCL' must be a positive integer >= 2!")
     b. <- coef(lm(y ~ x, data = tail(xy, n4VCL)))
+
+    # graph function
     f.plot <- function(...) {
         plot(y ~ x, data = xy, xaxt = "n", type = "b", las = 1, 
-            ylab = "Void ratio", xlab = expression(Log[10] ~ 
-                Applied ~ stress), main = "Compression curve", 
-            ...)
+            ylab = "Void ratio", xlab = "Applied stress", 
+            main = "Compression curve", ...)
         xval <- pretty(par("usr")[1:2])
         axis(side = 1, at = xval, labels = 10^xval)
     }
+
+    # swelling index
+    ySI <- predict(lm(y ~ x + I(x^2) + I(x^3) + I(x^4), data = xy),
+       newdata = data.frame(x = c(0, 1.39794)))
+    SI <- as.double(-coef(lm(ySI ~ c(0, 1.39794)))[2])
+
+    # methods
     if (method == "casagrande") {
         fit <- lm(y ~ x + I(x^2) + I(x^3) + I(x^4), data = xy)
         est <- as.double(coef(fit))
-        if (is.null(mcp)) {
-            est <- round(est, 3)
-            a0 <- est[1]; a1 <- est[2]; a2 <- est[3]; a3 <- est[4]; a4 <- est[5]
-            poli <- function(x) a0 + a1*x + a2*x^2 + a3*x^3 + a4*x^4
-            pmax <- maxcurv2(range(xy["x"]), poli)
-            mcp <- pmax$x0
-        }
+        if (is.null(mcp)) mcp <- -est[4] / (4*est[5])
         Xmax <- mcp
         Ymax <- predict(fit, newdata = data.frame(x = Xmax))
         b1.tan <- est[2] + 2 * est[3] * Xmax + 3 * est[4] * Xmax^2 + 
@@ -125,31 +129,23 @@ function (voidratio, stress, n4VCL = 2, method = c("casagrande",
                 col = "red")
         }
     }
-    sigmaP <- as.vector(10^x0)
-    cat("\nPreconsolidation stress:", sigmaP, "\n")
-    cat("Method:", method, "\n")
-    if (method == "casagrande") cat("mcp:", mcp, "\n")
-    invisible(sigmaP)
+
+    # outpup
+    out <- list(sigmaP = as.double(10^x0), method = method, 
+       mcp = mcp, CI = as.double(-b.[2]), SI = SI)
+    class(out) <- "sigmaP"
+    return(out)
 }
 
-# simplified maxcurv
-maxcurv2 <- function (x.range, fun) 
+# ----------------------------------
+# print method
+print.sigmaP <- function(x, digits = 4, ...)
 {
-    b <- lm(range(fun(x.range)) ~ x.range)$coef
-    newx <- seq(x.range[1], x.range[2], length.out = 2000)
-    newy <- fun(newx)
-    if (fun(x.range[1]) > fun(x.range[2])) {
-        si <- -1
-    } else {
-        si <- 1
-    }
-    pred.lm <- mean(fun(x.range)) - si * b[2] * mean(x.range) + 
-        si * b[2] * newx
-    delta <- NULL
-    for (i in 1:length(newy)) {
-        delta[i] <- abs(newy[i] - pred.lm[i])
-    }
-    ind <- which.max(delta)
-    out <- list(fun = deparse(fun)[2], x0 = newx[ind], y0 = newy[ind])
-    return(out)
+    cat("Preconsolidation stress:", round(x$sigmaP, digits))
+    cat("\nMethod:", x$method)
+    if (x$method == "casagrande") 
+       cat(", with mcp equal to", round(x$mcp, digits))
+    cat("\nCompression index:", round(x$CI, digits))
+    cat("\nSwelling index:", round(x$SI, digits), "\n")
+    invisible(x)
 }

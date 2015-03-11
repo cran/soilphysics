@@ -1,7 +1,7 @@
 .welcome <- function(text = NULL)
    {
    if(is.null(text))
-      text <- "Welcome to the statistical software revolution!"
+      text <- "Welcome to soilphysics!"
    if(!inherits(text, "character") || length(text) != 1)
       stop("'text' must be a character vector of length 1!")
    vec <- strsplit(text, "")[[1]]

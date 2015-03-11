@@ -38,20 +38,14 @@ Numerical values into \code{fun} with three or more digits may cause miscalculat
 \examples{
 # an exponential model
 f <- function(x) exp(-x)
-maxcurv(x.range = c(1, 5), fun = f)
-
-# Load Bearing Capacity Model
-b0 = 2.79
-b1 = -2.34
-lbc <- function(x) 10^(b0 + b1*x)
-maxcurv(x.range = c(0, 1), fun = lbc)
+maxcurv(x.range = c(-2, 5), fun = f)
 
 # Gompertz Growth Model
 Asym <- 8.5
 b2 <- 2.3
 b3 <- 0.6
 g <- function(x) Asym * exp(-b2 * b3 ^ x)
-maxcurv(x.range = c(0, 20), fun = g)
+maxcurv(x.range = c(-5, 20), fun = g)
 
 # Lessman & Atkins (1963) model for optimum plot size
 a = 40.1

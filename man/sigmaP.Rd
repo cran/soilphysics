@@ -13,16 +13,14 @@ virgin compression line intercept.
 }
 
 \usage{
-sigmaP(voidratio, stress, n4VCL = 2,
-    method = c("casagrande", "VCLzero",
-    "reg1", "reg2", "reg3", "reg4", "pacheco"),
+sigmaP(voidratio, stress, n4VCL = 3,
+    method = c("casagrande", "VCLzero", "reg1", "reg2", "reg3", "reg4", "pacheco"),
     mcp = NULL, graph = TRUE, ...)
 }
 
-
 \arguments{
   \item{voidratio}{ a numeric vector containing void ratio (or bulk density) values. }
-  \item{stress}{ a numeric vector containing the applied stress sequence; see Note. }
+  \item{stress}{ a numeric vector containing the applied stress sequence.}
   \item{n4VCL}{ the number of points for calculating the slope of the soil Virgin Compression Line (VCL),
                 which is obtained by linear regression. }
   \item{method}{ a character indicating which method is to be computed; one of the following:
@@ -43,10 +41,18 @@ as described by Dias Junior & Pierce (1995). \code{pacheco} is the method of Pac
 
 You may follow the flowchart below to understand the determination of the preconsolidation stress through \code{sigmaP()}.
 
-\figure{sigmaPfluxo.jpg}{options: scale = 1.2}
+\figure{sigmaPfluxo.jpg}{options: scale = 1}
 }
 
-\value{ \code{sigmaP} returns the preconsolidation stress value. }
+\value{
+A list of
+  \item{sigmaP}{ the preconsolidation stress.}
+  \item{method}{ the method used as argument.}
+  \item{mcp}{ the maximum curvature point in log10 scale of \code{stress}; stored only if the
+	method \code{casagrande} is used.}
+  \item{CI}{ the compression index.}
+  \item{SI}{ the swelling index.}
+}
 
 \references{
 ABNT - Associacao Brasileira de Normas Tecnicas. (1990). \emph{Ensaio de
@@ -71,12 +77,6 @@ Dias Junior, M. S.; Pierce, F. J. (1995). A simple procedure for
 
 \author{ Anderson Rodrigo da Silva <anderson.agro@hotmail.com> }
 
-\note{
-The standard values for the applied stress sequence are: 25, 50, 
-100, 200, 400, 800 and 1600 kPa, according to Bowles (1986).
-}
-
-
 \seealso{
 \code{\link{voidratio}}, \code{\link{maxcurv}}, \code{\link{fitlbc}}
 }
@@ -86,10 +86,18 @@ pres <- c(1, 12.5, 25, 50, 100, 200, 400, 800, 1600)
 VR <- c(1.43, 1.41, 1.40, 1.39, 1.35, 1.31, 1.25, 1.18, 1.12)
 
 plot(VR ~ log10(pres), type = "b") # find the 'mcp'
-sigmaP(VR, pres, method = "casagrande", mcp = 1.6)
+sigmaP(VR, pres, method = "casagrande", mcp = 1.6, n4VCL = 2)
 
+# fitting the VCL
+sigmaP(VR, pres, method = "casagrande", mcp = 1.6, n4VCL = 3)
+
+# self-calculation of "mcp" argument for Casagrande method
+sigmaP(VR, pres, method = "casagrande", n4VCL = 3)
+
+# Pacheco method
 sigmaP(VR, pres, method = "pacheco")
 
+# Regression method
 sigmaP(VR, pres, method = "reg3")
 
 # End (not run)

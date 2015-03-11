@@ -16,9 +16,9 @@ llwr(theta, psi, Bd, Pr, particle.density, air.porosity,
 
 \arguments{
   \item{theta}{a numeric vector containing values of volumetric water content (\eqn{m^3~m^{-3}}).}
-  \item{psi}{a numeric vector containing values of water potential (Psi).}
+  \item{psi}{a numeric vector containing values of water potential (Psi, MPa, kPa, etc.).}
   \item{Bd}{a numeric vector containing values of dry bulk density (\eqn{Mg~m^{-3}}).}
-  \item{Pr}{a numeric vector containing values of penetration resistance.}
+  \item{Pr}{a numeric vector containing values of penetration resistance (MPa, kPa, etc.).}
   \item{particle.density}{the value of the soil particle density.}
   \item{air.porosity}{the value of the limiting soil air porosity.}
   \item{critical.PR}{the value of the critical soil penetration resistance.}
@@ -52,7 +52,7 @@ and the water potential (\eqn{\psi}) is:
 
 The model proposed by Ross et al. (1991) for the soil water content (\eqn{\theta}) as a function of the water potential (\eqn{\psi}) is:
 
-\deqn{\theta = a \psi^b}
+\deqn{\theta = a \psi^c}
 
 }
 

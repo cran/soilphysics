@@ -184,21 +184,23 @@ function(theta_R, theta_S, alpha, n, a, b, graph = TRUE,
         curve(der(x, theta_R, theta_S, alpha, n), 
             from = 0, to = 350, 
             xlab = xlab, ylab = ylab, main = "Wet range", ...)
-        curve(EK(x, theta_R, theta_S, alpha, n), add = TRUE, col = 4)
-        curve(EKa(x, theta_R, theta_S, alpha, n), add = TRUE, col = 2)
-        legend("topright", c("C(h)", "E[K](h)", "E[Ka](h)"), 
-            lty = c(1, 3, 2), col = c(1, 4, 2), bg = "lightyellow")
+        curve(EK(x, theta_R, theta_S, alpha, n), add = TRUE, lty = 3, col = 4)
+        curve(EKa(x, theta_R, theta_S, alpha, n), add = TRUE, lty = 2, col = 2)
+        legend("topright",  c(expression(C(h)), expression(E[R](h)), 
+             expression(E[RKdry](h))), lty = c(1, 3, 2), col = c(1, 4, 2), 
+             bg = "lightyellow")
     
         dev.new(width = 5, height = 5)
         curve(der(x, theta_R, theta_S, alpha, n), 
             from = h1.5, to = 15000, 
             xlab = xlab, ylab = ylab, main = "Dry range", ...)
         curve(ER(x, a, b, theta_R, theta_S, alpha, n), 
-            add = TRUE, from = h1.5, to = h2.5., col = 4)
+            add = TRUE, from = h1.5, to = h2.5., lty = 3, col = 4)
         curve(ERKdry(x, a, b, d = coef(fit2)[2], theta_R, theta_S, alpha, n), 
-            add = TRUE, from = 12000, to = 15000, col = 2)
-        legend("topright",  c("C(h)", "E[R](h)", "E[RKdry](h)"),
-             lty = c(1, 3, 2), col = c(1, 4, 2), bg = "lightyellow")
+            add = TRUE, from = 12000, to = 15000, lty = 2, col = 2)
+        legend("topright",  c(expression(C(h)), expression(E[R](h)), 
+             expression(E[RKdry](h))), lty = c(1, 3, 2), col = c(1, 4, 2), 
+             bg = "lightyellow")
     }
 
     # output

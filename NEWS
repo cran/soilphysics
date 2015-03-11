@@ -1,14 +1,28 @@
 ------------------------------------------------
+                version 2.1
+
+* Documentation fixes
+* corretions on the graphic output of iwc()
+* 'mcp' bug fixed on sigmaP()
+* new output for sigmaP(), now with compression and 
+	decompression indices
+* print method for sigmaP()
+* new functions: simSigmaP() and plotCIsigmaP()
+* bug fixed on maxcurv()
+* new graphical output for maxcurv()
+
+------------------------------------------------
                 version 2.0
 
 * Documentation fixes
 * new argument (water.model) in the function llwr()
 * new graphic output and print.method for llwr()
 * R-squared for the models fitted in llwr()
-* R-squared for the models fitted in fitsoilwater(), fitsoilwater2(),
-	fitsoilwater3(), fitsoilwater5()
-* new functions: soilwater2(), fitsoilwater2(), soilwater3(), fitsoilwater3(), 
-	soilwater4(), fitsoilwater4(), soilwater5(), fitsoilwater5(), 
+* R-squared for the models fitted in fitsoilwater(), 
+	fitsoilwater2(), fitsoilwater3(), fitsoilwater5()
+* new functions: soilwater2(), fitsoilwater2(), 
+	soilwater3(), fitsoilwater3(), soilwater4(), 
+	fitsoilwater4(), soilwater5(), fitsoilwater5(), 
 	soilwater6(), fitsoilwater6(), hydraulicCutOff(),
 	hemc(), iwc()
 
@@ -25,7 +39,8 @@
                 version 1.1
 
 * Documentation fixes
-* S3 print method for the classes: criticalmoisture, maxcurv and S.index
+* S3 print method for the classes: criticalmoisture, 
+	maxcurv and S.index
 
 ------------------------------------------------
                 version 1.0
