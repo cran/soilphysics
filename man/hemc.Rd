@@ -1,7 +1,7 @@
 \name{hemc}
 \alias{hemc}
 
-\title{ High-Energy-Moisture-Characteristics }
+\title{ High-Energy-Moisture-Characteristics Aggregate Stability }
 
 \description{
 A function to determine the modal suction, volume of drainable pores, structural index and stability ratio 

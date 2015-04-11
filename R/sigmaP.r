@@ -1,15 +1,14 @@
 sigmaP <- 
-function (voidratio, stress, n4VCL = 3, method = c("casagrande", 
-    "VCLzero", "reg1", "reg2", "reg3", "reg4", "pacheco"), mcp = NULL, 
-    graph = TRUE, ...) 
+function (voidratio, stress, n4VCL = 3, 
+	method = c("casagrande", "VCLzero", 
+	"reg1", "reg2", "reg3", "reg4", "pacheco"), 
+	mcp = NULL, graph = TRUE, ...) 
 {
     if (length(voidratio) != length(stress)) 
         stop("incompatible dimensions!")
     stopifnot(is.numeric(voidratio))
     stopifnot(is.numeric(stress))
     method <- match.arg(method)
-    #if (!is.null(mcp) & mcp < 0 || mcp > 3.2) 
-    #    stop("mcp must be a value between 0 and 3.2")
     x <- NULL
     xy <- sortedXyData(log10(stress), voidratio)
 
@@ -20,8 +19,10 @@ function (voidratio, stress, n4VCL = 3, method = c("casagrande",
 
     # graph function
     f.plot <- function(...) {
-        plot(y ~ x, data = xy, xaxt = "n", type = "b", las = 1, 
-            ylab = "Void ratio", xlab = "Applied stress", 
+        plot(y ~ x, data = xy, 
+            xaxt = "n", type = "b", las = 1, 
+            ylab = "Void ratio", 
+            xlab = "Applied stress", 
             main = "Compression curve", ...)
         xval <- pretty(par("usr")[1:2])
         axis(side = 1, at = xval, labels = 10^xval)
@@ -36,11 +37,16 @@ function (voidratio, stress, n4VCL = 3, method = c("casagrande",
     if (method == "casagrande") {
         fit <- lm(y ~ x + I(x^2) + I(x^3) + I(x^4), data = xy)
         est <- as.double(coef(fit))
-        if (is.null(mcp)) mcp <- -est[4] / (4*est[5])
+        if (is.null(mcp)) {
+            mcp <- -est[4] / (4*est[5])
+        } else {
+            if (mcp < 0 || mcp > 3.2) 
+               stop("'mcp' must be a value between 0 and 3.2")
+        }
         Xmax <- mcp
         Ymax <- predict(fit, newdata = data.frame(x = Xmax))
-        b1.tan <- est[2] + 2 * est[3] * Xmax + 3 * est[4] * Xmax^2 + 
-            4 * est[5] * Xmax^3
+        b1.tan <- est[2] + 2 * est[3] * Xmax + 
+            3 * est[4] * Xmax^2 + 4 * est[5] * Xmax^3
         b0.tan <- Ymax - b1.tan * Xmax
         b0.bis <- Ymax - b1.tan/2 * Xmax
         b1.bis <- b1.tan/2
@@ -64,8 +70,9 @@ function (voidratio, stress, n4VCL = 3, method = c("casagrande",
             f.plot(...)
             abline(b., lty = 3)
             abline(b, lty = 3)
-            lines(x = c(x0, x0), y = c(-1e+09, b[1] + b[2] * 
-                x0), lty = 1, col = "red")
+            lines(x = c(x0, x0), 
+                y = c(-1e+09, b[1] + b[2] * x0), 
+                lty = 1, col = "red")
         }
     }
     else if (method == "reg1") {
@@ -75,8 +82,9 @@ function (voidratio, stress, n4VCL = 3, method = c("casagrande",
             f.plot(...)
             abline(b., lty = 3)
             abline(b, lty = 3)
-            lines(x = c(x0, x0), y = c(-1e+09, b[1] + b[2] * 
-                x0), lty = 1, col = "red")
+            lines(x = c(x0, x0), 
+                y = c(-1e+09, b[1] + b[2] * x0), 
+                lty = 1, col = "red")
         }
     }
     else if (method == "reg2") {
@@ -86,8 +94,9 @@ function (voidratio, stress, n4VCL = 3, method = c("casagrande",
             f.plot(...)
             abline(b., lty = 3)
             abline(b, lty = 3)
-            lines(x = c(x0, x0), y = c(-1e+09, b[1] + b[2] * 
-                x0), lty = 1, col = "red")
+            lines(x = c(x0, x0), 
+                y = c(-1e+09, b[1] + b[2] * x0), 
+                lty = 1, col = "red")
         }
     }
     else if (method == "reg3") {
@@ -97,8 +106,9 @@ function (voidratio, stress, n4VCL = 3, method = c("casagrande",
             f.plot(...)
             abline(b., lty = 3)
             abline(b, lty = 3)
-            lines(x = c(x0, x0), y = c(-1e+09, b[1] + b[2] * 
-                x0), lty = 1, col = "red")
+            lines(x = c(x0, x0), 
+                y = c(-1e+09, b[1] + b[2] * x0), 
+                lty = 1, col = "red")
         }
     }
     else if (method == "reg4") {
@@ -108,8 +118,9 @@ function (voidratio, stress, n4VCL = 3, method = c("casagrande",
             f.plot(...)
             abline(b., lty = 3)
             abline(b, lty = 3)
-            lines(x = c(x0, x0), y = c(-1e+09, b[1] + b[2] * 
-                x0), lty = 1, col = "red")
+            lines(x = c(x0, x0), 
+                y = c(-1e+09, b[1] + b[2] * x0), 
+                lty = 1, col = "red")
         }
     }
     else if (method == "pacheco") {
@@ -122,11 +133,13 @@ function (voidratio, stress, n4VCL = 3, method = c("casagrande",
             f.plot(...)
             abline(b., lty = 3)
             abline(h = xy$y[1], lty = 3)
-            lines(x = c(x0., x0.), y = c(xy$y[1], y0.), lty = 3, 
+            lines(x = c(x0., x0.), 
+                y = c(xy$y[1], y0.), lty = 3, 
                 col = "red")
-            lines(x = c(x0., x0), y = c(y0., y0.), lty = 3, col = "red")
-            lines(x = c(x0, x0), y = c(-1e+09, y0.), lty = 1, 
-                col = "red")
+            lines(x = c(x0., x0), 
+                y = c(y0., y0.), lty = 3, col = "red")
+            lines(x = c(x0, x0), 
+                y = c(-1e+09, y0.), lty = 1, col = "red")
         }
     }
 

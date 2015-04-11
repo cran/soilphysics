@@ -1,4 +1,12 @@
 ------------------------------------------------
+                version 2.2
+
+* Documentation fixes
+* New argument (hos = 0) on iwc() for dealing with
+	salinity effects
+* Boundaries for the argument mcp of sigmaP()
+
+------------------------------------------------
                 version 2.1
 
 * Documentation fixes

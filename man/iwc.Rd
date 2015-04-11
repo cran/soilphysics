@@ -10,8 +10,9 @@ for estimation of the water retention curve and a simple power model for penetra
 }
 
 \usage{
-iwc(theta_R, theta_S, alpha, n, a, b, graph = TRUE,
-	xlab = "Matric potential (hPa)", ylab = "Water content", ...)
+iwc(theta_R, theta_S, alpha, n, a, b, hos = 0, 
+	graph = TRUE, xlab = "Matric potential (hPa)", 
+	ylab = "Water content", ...)
 }
 
 \arguments{
@@ -21,6 +22,9 @@ iwc(theta_R, theta_S, alpha, n, a, b, graph = TRUE,
   \item{n}{ a shape parameter from van Genuchten's model; see details.}
   \item{a}{ a parameter of the soil penetration resistance model; see details.}
   \item{b}{ a parameter of the soil penetration resistance model; see details.}
+  \item{hos}{ optional; the value of osmotic head at which the soil pores become saturated. Used only if one is 
+	concerned about the salinity effects on the water available for plants. Default is zero. 
+	See Groenevelt et al. (2004) for more details.}
   \item{graph}{logical; if TRUE (default), graphics for both dry and wet range are built.}
   \item{xlab}{ a label for x-axis.}
   \item{ylab}{ a label for y-axis.}
@@ -44,7 +48,10 @@ Asgarzadeh, H.; Mosaddeghi, M.R.; Nikbakht, A.M. (2014) SAWCal: A user-friendly 
 	\emph{Computers and Electronics in Agriculture}, 109:86--93.
 
 Groenevelt, P.H.; Grant, C.D.; Semetsa, S. (2001) A new procedure to determine soil water availability.
-	\emph{Aust. J. Soil Res.}, 39:577--598.
+	\emph{Australian Journal Soil Research}, 39:577--598.
+
+Groenevelt, P.H., Grant, C.D., Murray, R.S. (2004) On water availability in saline soils. 
+	\emph{Australian Journal Soil Research}, 42:833--840.
 }
 
 \author{
@@ -52,7 +59,7 @@ Anderson Rodrigo da Silva <anderson.agro@hotmail.com>
 }
 
 \seealso{
-\code{soilwater}, \code{fitsoilwater}, \code{llwr}
+\code{\link{soilwater}}, \code{\link{fitsoilwater}}, \code{\link{llwr}}
 }
 
 \examples{
@@ -63,6 +70,10 @@ iwc(theta_R = 0.0160, theta_S = 0.4828, alpha = 0.0471, n = 1.2982,
 # example 2 (Table 1, Asgarzadeh et al., 2014)
 iwc(theta_R = 0.166, theta_S = 0.569, alpha = 0.029, n = 1.308, 
 	a = 0.203, b = 0.256, graph = TRUE) 
+
+# example 3: evaluating the salinity effect
+iwc(theta_R = 0.166, theta_S = 0.569, alpha = 0.029, n = 1.308, 
+	a = 0.203, b = 0.256, hos = 200, graph = TRUE)
 
 # End (Not run)
 }
