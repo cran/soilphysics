@@ -83,7 +83,7 @@ Dias Junior, M. S.; Pierce, F. J. (1995). A simple procedure for
 
 \examples{
 pres <- c(1, 12.5, 25, 50, 100, 200, 400, 800, 1600)
-VR <- c(1.43, 1.41, 1.40, 1.39, 1.35, 1.31, 1.25, 1.18, 1.12)
+VR <- c(0.846, 0.829, 0.820, 0.802, 0.767, 0.717, 0.660, 0.595, 0.532)
 
 plot(VR ~ log10(pres), type = "b") # find the 'mcp'
 sigmaP(VR, pres, method = "casagrande", mcp = 1.6, n4VCL = 2)

@@ -1,4 +1,12 @@
 ------------------------------------------------
+                version 2.3
+
+* Documentation fixes
+* New detailed output for iwc() and new
+	graphical arguments
+* Three new methods for calculating 'mcp' with maxcurv()
+
+------------------------------------------------
                 version 2.2
 
 * Documentation fixes

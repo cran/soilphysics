@@ -13,8 +13,8 @@ Basic and model-based soil physical analyses.
 \tabular{ll}{
 Package: \tab soilphysics\cr
 Type: \tab Package\cr
-Version: \tab 2.2\cr
-Date: \tab 2015-04-10\cr
+Version: \tab 2.3\cr
+Date: \tab 2015-05-09\cr
 License: \tab GPL (>= 2)\cr
 }
 Functions for modelling the load bearing capacity and the penetration resistance. The package

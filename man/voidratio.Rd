@@ -26,16 +26,17 @@ voidratio(wetsoil, drysoil, diam.cylinder, height.cylinder,
 \seealso{ \code{\link{sigmaP}} }
 
 \examples{
-def <- c(0.10, 0.12, 0.13, 0.15, 0.20, 0.26, 0.34, 0.43, 0.52)
+def <- c(0, 0.0230, 0.0352, 0.0605, 0.1070, 0.1750, 0.2525, 0.3395, 0.4250)
 pres <- c(1, 12.5, 25, 50, 100, 200, 400, 800, 1600)
-VR <- voidratio(147.66, 118.13, 6.4, 3.4, 2.7, def)
+VR <- voidratio(wetsoil = 170.62, drysoil = 134.08, diam.cylinder = 6.95, 
+               height.cylinder = 2.5, dens.particle = 2.61, def)
 VR
-plot(VR ~ log10(pres), xaxt = "n", type = "b",
+
+plot(VR ~ pres, type = "b",
 	ylab = "Void ratio",
-	xlab = expression(Log[10]~Applied~stress~(kPa)),
-	main = "Compression curve")
-axis(side = 1, at = pretty(log10(pres)),
-	labels = 10^pretty(log10(pres)))
+	xlab = "Applied stress (kPa)",
+	main = "Compression curve", 
+	log = "x")
 
 # End (not run)
 }

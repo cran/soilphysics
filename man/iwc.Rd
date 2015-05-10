@@ -11,8 +11,19 @@ for estimation of the water retention curve and a simple power model for penetra
 
 \usage{
 iwc(theta_R, theta_S, alpha, n, a, b, hos = 0, 
-	graph = TRUE, xlab = "Matric potential (hPa)", 
-	ylab = "Water content", ...)
+    graph = TRUE, 
+    xlab = "Matric potential (hPa)", 
+    ylab = "Water content", 
+    xlim1 = NULL,
+    xlim2 = NULL, 
+    xlim3 = NULL,
+    ylim1 = NULL, 
+    ylim2 = NULL, 
+    ylim3 = NULL,
+    col12 = c("black", "blue", "red"),
+    col3 = c("orange", "black"),
+    lty12 = c(1, 3, 2), 
+    lty3 = c(2, 1), ...)
 }
 
 \arguments{
@@ -28,7 +39,13 @@ iwc(theta_R, theta_S, alpha, n, a, b, hos = 0,
   \item{graph}{logical; if TRUE (default), graphics for both dry and wet range are built.}
   \item{xlab}{ a label for x-axis.}
   \item{ylab}{ a label for y-axis.}
-  \item{\dots}{ further graphical parameters.}
+  \item{xlim1, xlim2, xlim3}{ the x limits (x1, x2) of each plot. See \code{\link{plot.default}}.}
+  \item{ylim1, ylim2, ylim3}{ the y limits (y1, y2) of each plot. See \code{\link{plot.default}}.}
+  \item{col12}{ a vector of length 3 containing the color of each line of the first two plots. See \code{\link{par}}.}
+  \item{col3}{ a vector of length 2 containing the color of each line of the third plot. See \code{\link{par}}.}
+  \item{lty12}{ a vector of length 3 containing the line types for the first two plots. See \code{\link{par}}.}
+  \item{lty3}{ a vector of length 2 containing the line types for the third plot. See \code{\link{par}}.}
+  \item{\dots}{ further graphical parameters. See \code{\link{par}}.}
 }
 
 \details{
@@ -37,9 +54,7 @@ The soil penetration resistance model: \eqn{PR = a*h^b}.
 }
 
 \value{
-A list of
-   \item{IWC}{ integral water capacity}
-   \item{EI}{ integral energy calculation}
+A table containing each integration of IWC (integral water capacity) and EI (integral energy calculation).
 }
 
 \references{
