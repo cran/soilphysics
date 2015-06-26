@@ -1,14 +1,21 @@
 \name{llwr}
 \alias{llwr}
 
-\title{Least Limiting Water Range}
+\title{Least Limiting Water Range (LLWR)}
 
-\description{A graphical solution for the Least Limiting Water Range.}
+\description{Graphical solution for the Least Limiting Water Range
+and parameter estimation of the related water retention and penetration resistance curves.
+A summary containing standard errors and statistical significance of the parameters is also given.
+}
 
 \usage{
-llwr(theta, psi, Bd, Pr, particle.density, air.porosity, 
-    critical.PR, psi.FC, psi.WP, water.model = c("Silva", "Ross"), 
-    pars.water = NULL, pars.busscher = NULL, graph = TRUE, graph2 = TRUE, 
+llwr(theta, psi, Bd, Pr, 
+    particle.density, air.porosity, 
+    critical.PR, psi.FC, psi.WP, 
+    water.model = c("Silva", "Ross"), 
+    Pr.model = c("Busscher", "noBd"),
+    pars.water = NULL, pars.Pr = NULL, 
+    graph = TRUE, graph2 = TRUE, 
     xlab = expression(Bulk~Density~(Mg~m^{-3})), 
     ylab = expression(theta~(m^{3}~m^{-3})), 
     main = "Least Limiting Water Range", ...) 
@@ -16,21 +23,25 @@ llwr(theta, psi, Bd, Pr, particle.density, air.porosity,
 
 \arguments{
   \item{theta}{a numeric vector containing values of volumetric water content (\eqn{m^3~m^{-3}}).}
-  \item{psi}{a numeric vector containing values of water potential (Psi, MPa, kPa, etc.).}
-  \item{Bd}{a numeric vector containing values of dry bulk density (\eqn{Mg~m^{-3}}).}
-  \item{Pr}{a numeric vector containing values of penetration resistance (MPa, kPa, etc.).}
-  \item{particle.density}{the value of the soil particle density.}
-  \item{air.porosity}{the value of the limiting soil air porosity.}
+  \item{psi}{a numeric vector containing values of water potential (Psi, MPa, kPa, ...).}
+  \item{Bd}{a numeric vector containing values of dry bulk density (\eqn{Mg~m^{-3}}).
+	Note that \code{Bd} can also be a vector of length 1. See details.}
+  \item{Pr}{a numeric vector containing values of penetration resistance (MPa, kPa, ...).}
+  \item{particle.density}{the value of the soil particle density (\eqn{Mg~m^{-3}}).}
+  \item{air.porosity}{the value of the limiting soil air porosity (\eqn{m^3~m^{-3}}).}
   \item{critical.PR}{the value of the critical soil penetration resistance.}
-  \item{psi.FC}{the value of the water potential at the field capacity.}
-  \item{psi.WP}{the value of the water potential at the wilting point.}
+  \item{psi.FC}{the value of water suction at the field capacity (MPa, kPa, hPa, ...).}
+  \item{psi.WP}{the value of water suction at the wilting point (MPa, kPa, hPa, ...).}
   \item{water.model}{a character; the model to be used for calculating the soil water content. It must be one of the
 	two: \code{"Silva"} (default) or \code{"Ross"}. See details.}
-  \item{pars.water}{optional; a numeric vector containing the estimates of the parameters of the soil water retention 
+  \item{Pr.model}{a character; the model to be used to predict soil penetration resistance. It must be one of the two: 
+	\code{"Busscher"} (default) or \code{"noBd"}. See details.}
+  \item{pars.water}{optional; a numeric vector containing the estimates of the three parameters of the soil water retention 
 	model employed. If \code{NULL} (default), \code{llwr()} estimates them using a Newton-Raphson algorithm. See details.}
-  \item{pars.busscher}{optional; a numeric vector containing estimates of the three parameters of the model proposed by
-	 Busscher (1990) for the functional relationship among \code{Pr}, \code{theta} and \code{Bd}.
-	If \code{NULL} (default), \code{llwr()} estimates them using a Newton-Raphson algorithm.}
+  \item{pars.Pr}{optional; a numeric vector containing estimates of the three parameters of the model proposed by 
+	Busscher (1990) for the functional relationship among \code{Pr}, \code{theta} and \code{Bd}. If NULL (default), 
+	\code{llwr()} estimates them using a Newton-Raphson algorithm. Moreover, if \code{Pr.model = "noBd"}, then the 
+	third value is considered to be null.}
   \item{graph}{logical; if TRUE (default) a graphical solution for the Least Limiting Water Range is plotted.}
   \item{graph2}{logical; if TRUE (default) a line of the Least Limiting Water Range as a function of bulk density is plotted. 
 	If \code{graph = FALSE}, then \code{llwr()} will automatically consider \code{graph2 = FALSE} too.}
@@ -43,16 +54,26 @@ llwr(theta, psi, Bd, Pr, particle.density, air.porosity,
 \details{
 The numeric vectors \code{theta}, \code{psi}, \code{Bd} and \code{Pr} are supposed to have the same length,
 and their values should have appropriate unit of measurement. For fitting purposes, it is not advisable to use
-vectors with less than five values.
+vectors with less than five values. It is possible to calculate the LLWR for a especific (unique) value of bulk 
+density. In This case, \code{Bd} should be a vector of length 1 and, therfore, it is not possible to fit the 
+models \code{"Silva"} and \code{"Busscher"}, for water content and penetration resistance, respectively.
 
 The model employed by Silva et al. (1994) for the soil water content (\eqn{\theta}) as a function of the soil bulk density (\eqn{\rho}) 
-and the water potential (\eqn{\psi}) is:
+and the matric suction (\eqn{\psi}) is:
 
-\deqn{\theta = exp(a + b\rho)\psi^c}
+\deqn{\theta = exp(a + b \rho)\psi^c}
 
 The model proposed by Ross et al. (1991) for the soil water content (\eqn{\theta}) as a function of the water potential (\eqn{\psi}) is:
 
 \deqn{\theta = a \psi^c}
+
+The penetration resistance model, as presented by Busscher (1990), is given by
+
+\deqn{Pr = b0 * (\theta^{b1}) * (\rho^{b2})}
+
+If the agrument \code{Bd} receives a single value of bulk density, then \code{llwr()} fits the following simplified model (option \code{noBd}):
+
+\deqn{Pr = b0 * \theta^{b1}}
 
 }
 
@@ -64,10 +85,10 @@ A list of
   \item{pars.water }{a "nls" object or a numeric vector containing estimates of the three parameters of the model employed by 
 	Silva et al. (1994) for	the functional relationship among \code{theta}, \code{Bd} and \code{psi}.}
   \item{r.squared.water }{a "Rsq" object containing the pseudo and the adjusted R-squared for the water model.}
-  \item{pars.busscher }{a "nls" object or a numeric vector containing estimates of the three parameters of the model proposed by
-	 Busscher (1990) for the functional relationship among \code{Pr}, \code{theta} and \code{Bd}.}
-  \item{r.squared.busscher }{a "Rsq" object containing the pseudo and the adjusted R-squared for the penetration resistance model.}
-  \item{area }{numeric; the shaded (LLWR) area.}
+  \item{pars.Pr }{a "nls" object or a numeric vector containing estimates of the three parameters of the penetration resistance model.}
+  \item{r.squared.Pr }{a "Rsq" object containing the pseudo and the adjusted R-squared for the penetration resistance model.}
+  \item{area }{numeric; the value of the shaded (LLWR) area. Calculated only when Bd is a vector of length > 1.}
+  \item{LLWR }{numeric; the value of LLWR (\eqn{m^3~m^{-3}}) corresponding to \code{Bd}. Calculated only when Bd is a single value.}
 }
 
 \references{
@@ -114,6 +135,13 @@ ex2 <- with(skp1994,
 		critical.PR = 2, psi.FC = 0.01, psi.WP = 1.5,
 		pars.water = a, pars.busscher = b))
 ex2
+
+# Example 3 - specifying a single value for Bd
+ex3 <- with(skp1994,
+	llwr(theta = Water, psi = Potential, Bd = 1.45, Pr = PR,
+		particle.density = 2.65, air.porosity = 0.1,
+		critical.PR = 2, psi.FC = 0.01, psi.WP = 1.5))
+ex3
 
 # End (not run)
 }

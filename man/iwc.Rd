@@ -1,19 +1,21 @@
 \name{iwc}
 \alias{iwc}
 
-\title{ Integral Water Capacity }
+\title{ Integral Water Capacity (IWC) }
 
 \description{
 Quantifying the soil water availability for plants through the IWC approach.
-The theory was based on the work of Asgarzadeh et al. (2014), using the van Genuchten-Mualem Model 
-for estimation of the water retention curve and a simple power model for penetration resistance.
+The theory was based on the work of Groenevelt et al. (2001), Groenevelt et al. (2004) and 
+Asgarzadeh et al. (2014), using the van Genuchten-Mualem Model for estimation of the water 
+retention curve and a simple power model for penetration resistance. The salinity effect on 
+soil available water is also implemented here, according to Groenevelt et al. (2004). 
 }
 
 \usage{
 iwc(theta_R, theta_S, alpha, n, a, b, hos = 0, 
     graph = TRUE, 
-    xlab = "Matric potential (hPa)", 
-    ylab = "Water content", 
+    xlab = "Matric suction (hPa)", 
+    ylab = expression(hPa^-1), 
     xlim1 = NULL,
     xlim2 = NULL, 
     xlim3 = NULL,
@@ -27,13 +29,13 @@ iwc(theta_R, theta_S, alpha, n, a, b, hos = 0,
 }
 
 \arguments{
-  \item{theta_R}{ the residual water content; a numeric parameter from van Genuchten's model; see details.}
-  \item{theta_S}{ the water content at saturation; a numeric parameter from van Genuchten's model; see details.}
+  \item{theta_R}{ the residual water content (\eqn{m^3~m{-3}}); a numeric parameter from van Genuchten's model; see details.}
+  \item{theta_S}{ the water content at saturation (\eqn{m^3~m{-3}}); a numeric parameter from van Genuchten's model; see details.}
   \item{alpha}{ a scale parameter from van Genuchten's model; see details.}
   \item{n}{ a shape parameter from van Genuchten's model; see details.}
   \item{a}{ a parameter of the soil penetration resistance model; see details.}
   \item{b}{ a parameter of the soil penetration resistance model; see details.}
-  \item{hos}{ optional; the value of osmotic head at which the soil pores become saturated. Used only if one is 
+  \item{hos}{ optional; the value of osmotic suction of the saturated soil extract (hPa). Used only if one is 
 	concerned about the salinity effects on the water available for plants. Default is zero. 
 	See Groenevelt et al. (2004) for more details.}
   \item{graph}{logical; if TRUE (default), graphics for both dry and wet range are built.}
@@ -50,7 +52,8 @@ iwc(theta_R, theta_S, alpha, n, a, b, hos = 0,
 
 \details{
 The parameters of the van Genuchten-Mualem Model can be estimated through the function \code{fitsoilwater()}. 
-The soil penetration resistance model: \eqn{PR = a*h^b}.
+The soil penetration resistance model is given by: \eqn{PR = a*h^b}, where \eqn{h} is the soil water content
+and \eqn{a} and \eqn{b} are the fitting parameters.
 }
 
 \value{

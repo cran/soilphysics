@@ -1,8 +1,8 @@
 iwc <- 
 function(theta_R, theta_S, alpha, n, a, b, hos = 0, 
       graph = TRUE, 
-	xlab = "Matric potential (hPa)", 
-      ylab = "Water content", 
+	xlab = "Matric suction (hPa)", 
+	ylab = expression(hPa^-1), 
 	xlim1 = NULL,
 	xlim2 = NULL, 
 	xlim3 = NULL,
@@ -242,6 +242,11 @@ function(theta_R, theta_S, alpha, n, a, b, hos = 0,
             col = col12[3],
             lty = lty12[3], 
             shade = col12[3])
+        legend("topright",  c(expression(C(h, h[os])), 
+             expression(EK[R](h, h[os])), 
+             expression(EKa[RKdry](h, h[os]))), 
+             lty = lty12, col = col12, 
+             bg = "lightyellow")
     
         #dev.new(width = 5, height = 5)
         curve.(der(x, theta_R, theta_S, alpha, n), 

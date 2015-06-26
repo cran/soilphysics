@@ -1,4 +1,11 @@
 ------------------------------------------------
+                version 2.4
+
+* Documentation fixes
+* New arguments for llwr() and new graphical output
+* Missing legends added to iwc() graphs
+
+------------------------------------------------
                 version 2.3
 
 * Documentation fixes

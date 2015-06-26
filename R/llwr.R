@@ -1,14 +1,17 @@
-llwr <- 
-function (theta, psi, Bd, Pr, particle.density, air.porosity, 
-    critical.PR, psi.FC, psi.WP, water.model = c("Silva", "Ross"), 
-    pars.water = NULL, pars.busscher = NULL, graph = TRUE, graph2 = TRUE, 
-    xlab = expression(Bulk~Density~(Mg~m^{-3})), 
-    ylab = expression(theta~(m^{3}~m^{-3})), 
+llwr <-
+function (theta, psi, Bd, Pr, 
+    particle.density, air.porosity, 
+    critical.PR, psi.FC, psi.WP, 
+    water.model = c("Silva", "Ross"), 
+    Pr.model = c("Busscher", "noBd"), 
+    pars.water = NULL, pars.Pr = NULL, 
+    graph = TRUE, graph2 = TRUE, 
+    xlab = expression(Bulk ~ Density ~ (Mg ~ m^{-3})), 
+    ylab = expression(theta ~ (m^{3} ~ m^{-3})), 
     main = "Least Limiting Water Range", ...) 
 {
     n <- length(theta)
-    if (length(psi) != n || length(Bd) != n || length(Pr) != 
-        n) 
+    if (length(psi) != n || length(Pr) != n) 
         stop("incompatible dimensions!")
     dat <- cbind(theta, psi, Bd, Pr)
     if (!is.numeric(dat)) 
@@ -17,20 +20,21 @@ function (theta, psi, Bd, Pr, particle.density, air.porosity,
         psi.FC, psi.WP)
     if (length(limits) > 5) 
         stop("each limiting value must be a single value!")
+    # water model ------------------------------------------
     water.model <- match.arg(water.model)
     if (is.null(pars.water)) {
-        if (water.model == "Silva") {
+        if (water.model == "Silva" & length(unique(Bd)) > 1L) {
             fit1. <- lm(log(theta) ~ Bd + log(psi))
             a. <- coef(fit1.)
-            fit1 <- nls(theta ~ exp(a + b * Bd) * psi^c, start = list(a = a.[1], 
-                b = a.[2], c = a.[3]))
+            fit1 <- nls(theta ~ exp(a + b * Bd) * psi^c, 
+                start = list(a = a.[1], b = a.[2], c = a.[3]))
             a <- coef(fit1)
         }
         else {
             fit1. <- lm(log(theta) ~ log(psi))
             a. <- coef(fit1.)
-            fit1 <- nls(theta ~ a * psi^b, start = list(a = exp(a.[1]), 
-                b = a.[2]))
+            fit1 <- nls(theta ~ a * psi^b, 
+                start = list(a = exp(a.[1]), b = a.[2]))
             a <- c(log(coef(fit1)[1]), 0, coef(fit1)[2])
         }
         rsq1 <- Rsq(fit1)
@@ -38,14 +42,26 @@ function (theta, psi, Bd, Pr, particle.density, air.porosity,
     else if (length(pars.water) == 3) {
         a <- pars.water
     }
-    if (is.null(pars.busscher)) {
-        fit2 <- fitbusscher(Pr, theta, Bd)
-        b <- coef(fit2)
+    # PR model --------------------------------------------
+    Pr.model <- match.arg(Pr.model)
+    if (is.null(pars.Pr)) {
+        if (Pr.model == "Busscher" & length(unique(Bd)) > 1L) {
+            fit2 <- fitbusscher(Pr, theta, Bd)
+            b <- coef(fit2)
+        }
+        else {
+            fit2. <- lm(log(Pr) ~ log(theta))
+            b. <- coef(fit2.)
+            fit2 <- nls(Pr ~ b0 * theta^b1, 
+                start = list(b0 = exp(b.[1]), b1 = b.[2]))
+            b <- c(coef(fit2)[1], coef(fit2)[2], 0)
+        }
         rsq2 <- Rsq(fit2)
     }
-    else if (length(pars.busscher) == 3) {
-        b <- pars.busscher
+    else if (length(pars.Pr) == 3) {
+        b <- pars.Pr
     }
+    # limiting functions -----------------------------------
     Dp <- particle.density
     thetaAFP <- 1 - Bd/Dp - air.porosity
     PRc <- critical.PR
@@ -53,65 +69,95 @@ function (theta, psi, Bd, Pr, particle.density, air.porosity,
     thetaFC <- exp(a[1] + a[2] * Bd) * psi.FC^a[3]
     thetaWP <- exp(a[1] + a[2] * Bd) * psi.WP^a[3]
     theta. <- cbind(thetaAFP, thetaPR, thetaFC, thetaWP)
-    x. <- seq(range(Bd)[1], range(Bd)[2], length.out = 100)
-    thetaAFP. <- 1 - x./Dp - air.porosity
-    thetaPR. <- (PRc/(b[1] * x.^b[3]))^(1/b[2])
-    mi <- which.min((thetaAFP. - thetaPR.)^2)
-    x <- seq(range(Bd)[1], x.[mi], length.out = 100)
-    yUp. <- cbind(1 - x/Dp - air.porosity, exp(a[1] + a[2] * 
-        x) * psi.FC^a[3])
+    if (length(unique(Bd)) > 1L) {
+        x. <- seq(range(Bd)[1], range(Bd)[2], length.out = 100)
+        thetaAFP. <- 1 - x./Dp - air.porosity
+        thetaPR. <- (PRc/(b[1] * x.^b[3]))^(1/b[2])
+        mi <- which.min((thetaAFP. - thetaPR.)^2)
+        x <- seq(range(Bd)[1], x.[mi], length.out = 100)
+    }
+    else {
+        x <- Bd
+    }
+    # defining LLWR ----------------------------------------
+    yUp. <- cbind(1 - x/Dp - air.porosity, 
+        exp(a[1] + a[2] * x) * psi.FC^a[3])
     yUp <- apply(yUp., 1, min)
-    yLow. <- cbind((PRc/(b[1] * x^b[3]))^(1/b[2]), exp(a[1] + 
-        a[2] * x) * psi.WP^a[3])
+    yLow. <- cbind((PRc/(b[1] * x^b[3]))^(1/b[2]), 
+        exp(a[1] + a[2] * x) * psi.WP^a[3])
     yLow <- apply(yLow., 1, max)
+    iho <- as.vector(yUp - yLow)
+    # graph ------------------------------------------------
     if (graph) {
-        plot(range(Bd), range(theta.) * c(1, 1.1), pch = "", 
-            xlab = xlab, ylab = ylab, main = main, ...)
-        polygon(c(x[1], x, x[100]), c(yLow[1], yUp, yLow[100]), 
-            col = gray(0.8, alpha = 1), border = FALSE)
-        polygon(c(x[1], x, x[100]), c(yUp[1], yLow, yUp[100]), 
-            col = gray(0.8, alpha = 1), border = FALSE)
-        curve(1 - x/Dp - air.porosity, add = TRUE)
-        curve(exp(a[1] + a[2] * x) * psi.FC^a[3], add = TRUE)
-        curve((PRc/(b[1] * x^b[3]))^(1/b[2]), add = TRUE, col = "blue", 
-            lty = 2)
-        curve(exp(a[1] + a[2] * x) * psi.WP^a[3], add = TRUE, 
-            col = "blue", lty = 2)
-        points(Bd, thetaAFP)
-        points(Bd, thetaFC, pch = 16)
-        points(Bd, thetaPR, col = "blue")
-        points(Bd, thetaWP, col = "blue", pch = 16)
-        tex <- c(expression(theta[AFP]), expression(theta[FC]), 
-            expression(theta[PR]), expression(theta[WP]))
-        legend("topright", tex, lty = c(1, 1, 2, 2), col = c(1, 
-            1, 4, 4), pch = c(1, 16, 1, 16), cex = 0.8, bg = "white")
-        if (graph2) {
-            dev.new(width = 3, height = 3)
-            plot(x, yUp - yLow, type = "l", xlab = xlab, ylab = "LLWR", 
-                ...)
+        if (length(unique(Bd)) > 1L) {
+            plot(range(Bd), range(theta.) * c(1, 1.1), pch = "", 
+                xlab = xlab, ylab = ylab, main = main, ...)
+            polygon(c(x[1], x, x[100]), c(yLow[1], yUp, yLow[100]), 
+                col = gray(0.8, alpha = 1), border = FALSE)
+            polygon(c(x[1], x, x[100]), c(yUp[1], yLow, yUp[100]), 
+                col = gray(0.8, alpha = 1), border = FALSE)
+            curve(1 - x/Dp - air.porosity, add = TRUE)
+            curve(exp(a[1] + a[2] * x) * psi.FC^a[3], add = TRUE)
+            curve((PRc/(b[1] * x^b[3]))^(1/b[2]), add = TRUE, 
+                col = "blue", lty = 2)
+            curve(exp(a[1] + a[2] * x) * psi.WP^a[3], add = TRUE, 
+                col = "blue", lty = 2)
+            points(Bd, thetaAFP)
+            points(Bd, thetaFC, pch = 16)
+            points(Bd, thetaPR, col = "blue")
+            points(Bd, thetaWP, col = "blue", pch = 16)
+            tex <- c(expression(theta[AFP]), expression(theta[FC]), 
+                expression(theta[PR]), expression(theta[WP]))
+            legend("topright", tex, lty = c(1, 1, 2, 2), col = c(1, 
+                1, 4, 4), pch = c(1, 16, 1, 16), cex = 0.8, bg = "white")
+            if (graph2) {
+                dev.new(width = 3, height = 3)
+                plot(x, yUp - yLow, type = "l", xlab = xlab, 
+                  ylab = "LLWR", ...)
+            }
+        }
+        else {
+            plot(rep(Bd, 4), theta., ylab = ylab, xlab = xlab, 
+                xaxt = "n", ...)
+            axis(1, Bd, Bd)
+            text(rep(Bd, 4) * 1.05, theta., c("AFP", "PR", "FC", 
+                "WP"), cex = 0.8)
+            polygon(x = c(-99, -99, 99, 99), y = c(yUp, yLow, 
+                yLow, yUp), border = NA, col = adjustcolor("blue", 
+                alpha.f = 0.1))
+            arrows(Bd, yLow, Bd, yUp, length = 0.08, angle = 90, 
+                code = 3, col = 4, ...)
         }
     }
-    area <- trapez(x, yUp) - trapez(x, yLow)
-    out <- list(limiting.theta = theta., 
+    # output -------------------------------------------------
+    if (length(unique(Bd)) > 1L) 
+        area <- trapez(x, yUp) - trapez(x, yLow)
+    out <- list(limiting.theta = drop(theta.), 
         pars.water = if (is.null(pars.water)) fit1 else a, 
-        r.squared.water = if (is.null(pars.water)) rsq1,
-        pars.busscher = if (is.null(pars.busscher)) fit2 else b,
-        r.squared.busscher = if (is.null(pars.busscher)) rsq2, 
-        area = area)
+        r.squared.water = if (is.null(pars.water)) rsq1, 
+        pars.Pr = if (is.null(pars.Pr)) fit2 else b, 
+        r.squared.Pr = if (is.null(pars.Pr)) rsq2, 
+        area = if (length(unique(Bd)) > 1L) area, 
+        LLWR = if (length(unique(Bd)) == 1L) iho)
     class(out) <- "llwr"
     return(out)
 }
 
 # -----------------------------------------------
 # print method
-print.llwr <- 
+print.llwr <-
 function (x, ...) 
 {
     cat("\n          Least Limiting Water Range \n")
-    cat("\n---------- \nLimiting theta (6 first rows):\n")
-    print(head(x$limiting.theta))
-
-    cat("\n\n---------- \nEstimates of the soil water content model: \n")
+    if (!is.null(x$area)) {
+        cat("\n---------- \nLimiting theta (6 first rows):\n")
+        print(head(x$limiting.theta))
+    }
+    else {
+        cat("\n---------- \nLimiting theta:\n")
+        print(drop(x$limiting.theta))
+    }
+    cat("\n---------- \nEstimates of the soil water content model: \n")
     if (inherits(x$pars.water, "nls")) {
         print(summary(x$pars.water))
         rsq1 <- x$r.squared.water$pseudo.R.squared
@@ -122,20 +168,23 @@ function (x, ...)
     else if (inherits(x$pars.water, "numeric")) {
         print(x$pars.water)
     }
-
-    cat("\n\n---------- \nEstimates of the soil penetration resistance model (Busscher, 1990): \n")
-    if (inherits(x$pars.busscher, "nls")) {
-        print(summary(x$pars.busscher))
-        rsq2 <- x$r.squared.busscher$pseudo.R.squared
+    cat("\n---------- \nEstimates of the soil penetration resistance model: \n")
+    if (inherits(x$pars.Pr, "nls")) {
+        print(summary(x$pars.Pr))
+        rsq2 <- x$r.squared.Pr$pseudo.R.squared
         cat("pseudo R-squared:", rsq2, "\n")
-        adj.rsq2 <- x$r.squared.busscher$adj.R.squared
+        adj.rsq2 <- x$r.squared.Pr$adj.R.squared
         cat("adjusted R-squared:", adj.rsq2, "\n")
     }
-    else if (inherits(x$pars.busscher, "numeric")) {
-        print(x$pars.busscher)
+    else if (inherits(x$pars.Pr, "numeric")) {
+        print(x$pars.Pr)
     }
-
-    cat("\n\n---------- \nShaded area:", x$area, "\n")
+    if (!is.null(x$area)) {
+        cat("\n---------- \nShaded area:", x$area, "\n")
+    }
+    else {
+        cat("\n---------- \nLLWR:", x$LLWR, "\n")
+    }
     invisible(x)
 }
 
