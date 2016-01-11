@@ -13,8 +13,8 @@ Basic and model-based soil physical analyses.
 \tabular{ll}{
 Package: \tab soilphysics\cr
 Type: \tab Package\cr
-Version: \tab 2.4\cr
-Date: \tab 2015-06-26\cr
+Version: \tab 3.0\cr
+Date: \tab 2016-01-11\cr
 License: \tab GPL (>= 2)\cr
 }
 Functions for modelling the load bearing capacity and the penetration resistance. The package
@@ -42,59 +42,10 @@ Maintainer: Anderson Rodrigo da Silva <anderson.agro@hotmail.com>
 }
 
 \references{
-ABNT - Associacao Brasileira de Normas Tecnicas. (1990). \emph{Ensaio de 
-	adensamento unidimensional}: NBR 12007. Rio de Janeiro. 13p.
+da Silva, A.R.; de Lima, R.P. (2015) soilphysics: an R package to determine soil preconsolidation pressure. 
+\emph{Computers and Geosciences}, 84: 54-60.
 
-Arvidsson, J.; Keller, T. (2004). Soil precompression stress I. A survey of 
-	Swedish arable soils. \emph{Soil & Tillage Research}, 77:85-95.
-
-Bowles, J. A. (1986). \emph{Engineering Properties of Soils and their Measurements}. 
-	3rd ed. McGraw-Hill Book Company, Inc. NY, 218pp.
-
-Busscher, W.J. (1990) Adjustment of flat-tipped penetrometer resistance data to 
-	common water content. \emph{Transactions of the ASAE}, 3:519-524.
-
-Casagrande, A. (1936). \emph{The determination of the pre-consolidation 
-	load and its practical significance}. In: Proceedings of the International 
-	Conference on Soil Mech. and Found. Eng. (ICSMFE), Cambridge, MA, 22-26 June 1936, 
-	vol. 3. Harvard University, Cambridge, MA, USA, pp. 60-64.
-
-Dexter, A. R. (2004). Soil physical quality Part I. Theory, effects of soil texture, 
-	density, and organic matter, and effects on root growth. \emph{Geoderma}, 120:201-214.
-
-Dexter et al. (2008). A user-friendly water retention function that takes account of the textural
-	and structural pore spaces in soil. \emph{Geoderma}, 143:243-253.
-
-Dexter et al. (2012). Equilibrium, non-equilibrium and residual water: Consequences for soil
-	water retention. Geoderma, 177-178: 63-71.
-
-Dias Junior, M. S.; Pierce, F. J. (1995). A simple procedure for estimating preconsolidation 
-	pressure from soil compression curves. \emph{Soil Technology}, 8:139-151.
-
-Groenevelt & Grant (2004). A new model for the soil-water retention curve that solves the problem 
-	of residualwater contents. \emph{European Journal of Soil Science}, 55:479-485.
-
-Leao et al. (2005). An Algorithm for Calculating the Least Limiting Water Range of Soils. 
-	\emph{Agronomy Journal}, 97:1210-1215.
-
-Mualem, Y. (1976) A new model for predicting the hydraulic conductivity 
-	of unsaturated porous media. \emph{Water Resources Research}, 12:513-522.
-
-Pierson, F.B.; Mulla, D.J. (1989) An Improved Method for Measuring Aggregate Stability
-	of a Weakly Aggregated Loessial Soil. \emph{Soil Sci. Soc. Am. J.}, 53:1825--1831.
-
-Proctor, E. R. (1933). Design and construction of rolled earth dams. 
-	\emph{Eng. News Record}, 3:245-284, 286-289, 348-351, 372-376.
-
-Ross et al. (1991). Equation for extending water-retention curves to dryness.
-	\emph{Soil Science Society of America Journal}, 55:923-927. 
-
-Silva et al. (2010). Indicadores da qualidade fisica do solo. In: Jong Van Lier, Q. (Ed). 
-	\emph{Fisica do solo}. Vicosa (MG): Sociedade Brasileira de Ciencia do Solo. p.541-281.
-
-Silva et al. (1994). Characterization of the least limiting water range of soils. 
-	\emph{Soil Science Society of America Journal}, 58:1775-1781.
-
-van Genuchten, M.T. (1980) A closed form equation for predicting the hydraulic conductivity of 
-	unsaturated soils. \emph{Soil Science Society of America Journal}, 44:892-898.
+de Lima, R.P.; da Silva, A.R.; da Silva, A.P.; Leao, T.P.; Mosaddeghi, M.R. (2016) soilphysics: an R package 
+for calculating soil water availability to plants by different soil physical indices.
+\emph{Computers and Eletronics in Agriculture}, 120: 63-71.
 }

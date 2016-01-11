@@ -1,17 +1,18 @@
 Package: soilphysics
 Type: Package
 Title: Soil Physical Analysis
-Version: 2.4
-Date: 2015-06-26
+Version: 3.0
+Date: 2016-01-11
 LazyLoad: yes
 LazyData: yes
 Author: Anderson Rodrigo da Silva, Renato Paiva de Lima
 Maintainer: Anderson Rodrigo da Silva <anderson.agro@hotmail.com>
-Depends: R (>= 2.15), utils, rpanel, MASS, tcltk
+Depends: R (>= 2.15), rpanel, MASS, tcltk, tkrplot
+Imports: utils, stats, graphics, boot, grDevices, datasets
 Suggests: soiltexture
 Description: Basic and model-based soil physical analyses.
 License: GPL (>= 2)
 NeedsCompilation: no
-Packaged: 2015-06-26 08:53:21 UTC; AndersonRodrigoda
+Packaged: 2016-01-11 10:32:40 UTC; AndersonRodrigoda
 Repository: CRAN
-Date/Publication: 2015-06-26 11:21:21
+Date/Publication: 2016-01-11 12:47:59

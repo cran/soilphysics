@@ -1,7 +1,7 @@
 llwr <-
-function (theta, psi, Bd, Pr, 
-    particle.density, air.porosity, 
-    critical.PR, psi.FC, psi.WP, 
+function (theta, h, Bd, Pr, 
+    particle.density, air, 
+    critical.PR, h.FC, h.WP, 
     water.model = c("Silva", "Ross"), 
     Pr.model = c("Busscher", "noBd"), 
     pars.water = NULL, pars.Pr = NULL, 
@@ -11,29 +11,28 @@ function (theta, psi, Bd, Pr,
     main = "Least Limiting Water Range", ...) 
 {
     n <- length(theta)
-    if (length(psi) != n || length(Pr) != n) 
+    if (length(h) != n || length(Pr) != n) 
         stop("incompatible dimensions!")
-    dat <- cbind(theta, psi, Bd, Pr)
+    dat <- cbind(theta, h, Bd, Pr)
     if (!is.numeric(dat)) 
         stop("non-numeric data!")
-    limits <- c(particle.density, air.porosity, critical.PR, 
-        psi.FC, psi.WP)
+    limits <- c(particle.density, air, critical.PR, h.FC, h.WP)
     if (length(limits) > 5) 
         stop("each limiting value must be a single value!")
     # water model ------------------------------------------
     water.model <- match.arg(water.model)
     if (is.null(pars.water)) {
         if (water.model == "Silva" & length(unique(Bd)) > 1L) {
-            fit1. <- lm(log(theta) ~ Bd + log(psi))
+            fit1. <- lm(log(theta) ~ Bd + log(h))
             a. <- coef(fit1.)
-            fit1 <- nls(theta ~ exp(a + b * Bd) * psi^c, 
+            fit1 <- nls(theta ~ exp(a + b * Bd) * h^c, 
                 start = list(a = a.[1], b = a.[2], c = a.[3]))
             a <- coef(fit1)
         }
         else {
-            fit1. <- lm(log(theta) ~ log(psi))
+            fit1. <- lm(log(theta) ~ log(h))
             a. <- coef(fit1.)
-            fit1 <- nls(theta ~ a * psi^b, 
+            fit1 <- nls(theta ~ a * h^b, 
                 start = list(a = exp(a.[1]), b = a.[2]))
             a <- c(log(coef(fit1)[1]), 0, coef(fit1)[2])
         }
@@ -63,28 +62,28 @@ function (theta, psi, Bd, Pr,
     }
     # limiting functions -----------------------------------
     Dp <- particle.density
-    thetaAFP <- 1 - Bd/Dp - air.porosity
+    thetaA <- 1 - Bd/Dp - air
     PRc <- critical.PR
     thetaPR <- (PRc/(b[1] * Bd^b[3]))^(1/b[2])
-    thetaFC <- exp(a[1] + a[2] * Bd) * psi.FC^a[3]
-    thetaWP <- exp(a[1] + a[2] * Bd) * psi.WP^a[3]
-    theta. <- cbind(thetaAFP, thetaPR, thetaFC, thetaWP)
+    thetaFC <- exp(a[1] + a[2] * Bd) * h.FC^a[3]
+    thetaWP <- exp(a[1] + a[2] * Bd) * h.WP^a[3]
+    theta. <- cbind(thetaA, thetaPR, thetaFC, thetaWP)
     if (length(unique(Bd)) > 1L) {
         x. <- seq(range(Bd)[1], range(Bd)[2], length.out = 100)
-        thetaAFP. <- 1 - x./Dp - air.porosity
+        thetaA. <- 1 - x./Dp - air
         thetaPR. <- (PRc/(b[1] * x.^b[3]))^(1/b[2])
-        mi <- which.min((thetaAFP. - thetaPR.)^2)
+        mi <- which.min((thetaA. - thetaPR.)^2)
         x <- seq(range(Bd)[1], x.[mi], length.out = 100)
     }
     else {
         x <- Bd
     }
     # defining LLWR ----------------------------------------
-    yUp. <- cbind(1 - x/Dp - air.porosity, 
-        exp(a[1] + a[2] * x) * psi.FC^a[3])
+    yUp. <- cbind(1 - x/Dp - air, 
+        exp(a[1] + a[2] * x) * h.FC^a[3])
     yUp <- apply(yUp., 1, min)
     yLow. <- cbind((PRc/(b[1] * x^b[3]))^(1/b[2]), 
-        exp(a[1] + a[2] * x) * psi.WP^a[3])
+        exp(a[1] + a[2] * x) * h.WP^a[3])
     yLow <- apply(yLow., 1, max)
     iho <- as.vector(yUp - yLow)
     # graph ------------------------------------------------
@@ -96,17 +95,17 @@ function (theta, psi, Bd, Pr,
                 col = gray(0.8, alpha = 1), border = FALSE)
             polygon(c(x[1], x, x[100]), c(yUp[1], yLow, yUp[100]), 
                 col = gray(0.8, alpha = 1), border = FALSE)
-            curve(1 - x/Dp - air.porosity, add = TRUE)
-            curve(exp(a[1] + a[2] * x) * psi.FC^a[3], add = TRUE)
+            curve(1 - x/Dp - air, add = TRUE)
+            curve(exp(a[1] + a[2] * x) * h.FC^a[3], add = TRUE)
             curve((PRc/(b[1] * x^b[3]))^(1/b[2]), add = TRUE, 
                 col = "blue", lty = 2)
-            curve(exp(a[1] + a[2] * x) * psi.WP^a[3], add = TRUE, 
+            curve(exp(a[1] + a[2] * x) * h.WP^a[3], add = TRUE, 
                 col = "blue", lty = 2)
-            points(Bd, thetaAFP)
+            points(Bd, thetaA)
             points(Bd, thetaFC, pch = 16)
             points(Bd, thetaPR, col = "blue")
             points(Bd, thetaWP, col = "blue", pch = 16)
-            tex <- c(expression(theta[AFP]), expression(theta[FC]), 
+            tex <- c(expression(theta[A]), expression(theta[FC]), 
                 expression(theta[PR]), expression(theta[WP]))
             legend("topright", tex, lty = c(1, 1, 2, 2), col = c(1, 
                 1, 4, 4), pch = c(1, 16, 1, 16), cex = 0.8, bg = "white")
@@ -120,7 +119,7 @@ function (theta, psi, Bd, Pr,
             plot(rep(Bd, 4), theta., ylab = ylab, xlab = xlab, 
                 xaxt = "n", ...)
             axis(1, Bd, Bd)
-            text(rep(Bd, 4) * 1.05, theta., c("AFP", "PR", "FC", 
+            text(rep(Bd, 4) * 1.05, theta., c("A", "PR", "FC", 
                 "WP"), cex = 0.8)
             polygon(x = c(-99, -99, 99, 99), y = c(yUp, yLow, 
                 yLow, yUp), border = NA, col = adjustcolor("blue", 

@@ -30,8 +30,7 @@ export(simSigmaP)
 export(plotCIsigmaP)
 
 # Imports
-import(utils, rpanel)
-importFrom(MASS, mvrnorm)
+import(utils, rpanel, tkrplot, MASS, boot, stats, graphics, grDevices, datasets)
 importFrom(tcltk, tkProgressBar, setTkProgressBar)
 
 # S3method

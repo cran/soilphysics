@@ -11,12 +11,12 @@ Data set presented by Leao et al. (2005), for determining the Least Limiting Wat
 \usage{data(skp1994)}
 
 \format{
-  A data frame with 8 observations on the following 4 variables:
+  A data frame with 64 observations on the following 4 variables:
   \describe{
-    \item{\code{BD}}{a numeric vector containing soil bulk density values, in g/cm3.}
-    \item{\code{Water}}{a numeric vector containing volumetric water content values, in cm3/cm3.}
+    \item{\code{BD}}{a numeric vector containing soil bulk density values, in Mg/m3.}
+    \item{\code{W}}{a numeric vector containing volumetric water content values, in m3/m3.}
     \item{\code{PR}}{a numeric vector containing penetration resistance values, in MPa.}
-    \item{\code{Potential}}{a numeric vector containing water potential values, in MPa.}
+    \item{\code{h}}{a numeric vector containing matric head values, in cm.}
   }
 }
 

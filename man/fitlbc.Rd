@@ -19,7 +19,7 @@ it uses them to provide its least-squares estimates via \code{\link{nls}}.
 }
 
 \value{
-A \code{\link{nls}} output (see \code{help(nls)}).
+A \code{\link{nls}} object.
 }
 
 \references{

@@ -46,7 +46,7 @@ function(theta, Bd, samples = NULL, graph = TRUE, ...)
          pch = "",
          xlab = "Moisture",
          ylab = "Bulk density",
-         main = "Soil compactation curve", ...)
+         main = "Soil compaction curve", ...)
       for (j in 1:nsamp) {
          points(Bd[samples == lev[j]] ~ theta[samples == lev[j]],
             col = j)

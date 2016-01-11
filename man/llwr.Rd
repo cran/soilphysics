@@ -9,9 +9,9 @@ A summary containing standard errors and statistical significance of the paramet
 }
 
 \usage{
-llwr(theta, psi, Bd, Pr, 
-    particle.density, air.porosity, 
-    critical.PR, psi.FC, psi.WP, 
+llwr(theta, h, Bd, Pr, 
+    particle.density, air, 
+    critical.PR, h.FC, h.WP, 
     water.model = c("Silva", "Ross"), 
     Pr.model = c("Busscher", "noBd"),
     pars.water = NULL, pars.Pr = NULL, 
@@ -23,15 +23,15 @@ llwr(theta, psi, Bd, Pr,
 
 \arguments{
   \item{theta}{a numeric vector containing values of volumetric water content (\eqn{m^3~m^{-3}}).}
-  \item{psi}{a numeric vector containing values of water potential (Psi, MPa, kPa, ...).}
+  \item{h}{a numeric vector containing values of matric head (cm, Psi, MPa, kPa, ...).}
   \item{Bd}{a numeric vector containing values of dry bulk density (\eqn{Mg~m^{-3}}).
 	Note that \code{Bd} can also be a vector of length 1. See details.}
   \item{Pr}{a numeric vector containing values of penetration resistance (MPa, kPa, ...).}
   \item{particle.density}{the value of the soil particle density (\eqn{Mg~m^{-3}}).}
-  \item{air.porosity}{the value of the limiting soil air porosity (\eqn{m^3~m^{-3}}).}
+  \item{air}{the value of the limiting volumetric air content (\eqn{m^3~m^{-3}}).}
   \item{critical.PR}{the value of the critical soil penetration resistance.}
-  \item{psi.FC}{the value of water suction at the field capacity (MPa, kPa, hPa, ...).}
-  \item{psi.WP}{the value of water suction at the wilting point (MPa, kPa, hPa, ...).}
+  \item{h.FC}{the value of matric head at the field capacity (cm, MPa, kPa, hPa, ...).}
+  \item{h.WP}{the value of matric head at the wilting point (cm, MPa, kPa, hPa, ...).}
   \item{water.model}{a character; the model to be used for calculating the soil water content. It must be one of the
 	two: \code{"Silva"} (default) or \code{"Ross"}. See details.}
   \item{Pr.model}{a character; the model to be used to predict soil penetration resistance. It must be one of the two: 
@@ -52,20 +52,20 @@ llwr(theta, psi, Bd, Pr,
 }
 
 \details{
-The numeric vectors \code{theta}, \code{psi}, \code{Bd} and \code{Pr} are supposed to have the same length,
+The numeric vectors \code{theta}, \code{h}, \code{Bd} and \code{Pr} are supposed to have the same length,
 and their values should have appropriate unit of measurement. For fitting purposes, it is not advisable to use
 vectors with less than five values. It is possible to calculate the LLWR for a especific (unique) value of bulk 
 density. In This case, \code{Bd} should be a vector of length 1 and, therfore, it is not possible to fit the 
 models \code{"Silva"} and \code{"Busscher"}, for water content and penetration resistance, respectively.
 
 The model employed by Silva et al. (1994) for the soil water content (\eqn{\theta}) as a function of the soil bulk density (\eqn{\rho}) 
-and the matric suction (\eqn{\psi}) is:
+and the matric head (h) is:
 
-\deqn{\theta = exp(a + b \rho)\psi^c}
+\deqn{\theta = exp(a + b \rho)h^c}
 
-The model proposed by Ross et al. (1991) for the soil water content (\eqn{\theta}) as a function of the water potential (\eqn{\psi}) is:
+The model proposed by Ross et al. (1991) for the soil water content (\eqn{\theta}) as a function of the matric head (h) is:
 
-\deqn{\theta = a \psi^c}
+\deqn{\theta = a h^c}
 
 The penetration resistance model, as presented by Busscher (1990), is given by
 
@@ -80,10 +80,10 @@ If the agrument \code{Bd} receives a single value of bulk density, then \code{ll
 \value{
 A list of
   \item{limiting.theta }{a \eqn{n x 4} matrix containing the limiting values of water content for each input 
-	value of bulk density at the air field porosity (\code{thetaAFP}), penetration resistance (\code{thetaPR}),
+	value of bulk density at the volumetric air content (\code{thetaA}), penetration resistance (\code{thetaPR}),
 	field capacity (\code{thetaFC}) and wilting point (\code{thetaWP}).}
   \item{pars.water }{a "nls" object or a numeric vector containing estimates of the three parameters of the model employed by 
-	Silva et al. (1994) for	the functional relationship among \code{theta}, \code{Bd} and \code{psi}.}
+	Silva et al. (1994) for	the functional relationship among \code{theta}, \code{Bd} and \code{h}.}
   \item{r.squared.water }{a "Rsq" object containing the pseudo and the adjusted R-squared for the water model.}
   \item{pars.Pr }{a "nls" object or a numeric vector containing estimates of the three parameters of the penetration resistance model.}
   \item{r.squared.Pr }{a "Rsq" object containing the pseudo and the adjusted R-squared for the penetration resistance model.}
@@ -121,26 +121,26 @@ Anderson Rodrigo da Silva <anderson.agro@hotmail.com>
 # Example 1 - part of the data set used by Leao et al. (2005)
 data(skp1994)
 ex1 <- with(skp1994,
-	llwr(theta = Water, psi = Potential, Bd = BD, Pr = PR,
-		particle.density = 2.65, air.porosity = 0.1,
-		critical.PR = 2, psi.FC = 0.01, psi.WP = 1.5))
+	llwr(theta = W, h = h, Bd = BD, Pr = PR,
+		particle.density = 2.65, air = 0.1,
+		critical.PR = 2, h.FC = 100, h.WP = 15000))
 ex1
 
 # Example 2 - specifying the parameters (Leao et al., 2005)
 a <- c(-0.9175, -0.3027, -0.0835)  # Silva et al. model of water content
 b <- c(0.0827, -1.6087, 3.0570)   # Busscher's model
 ex2 <- with(skp1994,
-	llwr(theta = Water, psi = Potential, Bd = BD, Pr = PR,
-		particle.density = 2.65, air.porosity = 0.1,
-		critical.PR = 2, psi.FC = 0.01, psi.WP = 1.5,
+	llwr(theta = W, h = h, Bd = BD, Pr = PR,
+		particle.density = 2.65, air = 0.1,
+		critical.PR = 2, h.FC = 100, h.WP = 15000,
 		pars.water = a, pars.busscher = b))
 ex2
 
 # Example 3 - specifying a single value for Bd
 ex3 <- with(skp1994,
-	llwr(theta = Water, psi = Potential, Bd = 1.45, Pr = PR,
-		particle.density = 2.65, air.porosity = 0.1,
-		critical.PR = 2, psi.FC = 0.01, psi.WP = 1.5))
+	llwr(theta = W, h = h, Bd = 1.45, Pr = PR,
+		particle.density = 2.65, air = 0.1,
+		critical.PR = 2, h.FC = 100, h.WP = 15000))
 ex3
 
 # End (not run)

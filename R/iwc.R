@@ -1,8 +1,8 @@
 iwc <- 
 function(theta_R, theta_S, alpha, n, a, b, hos = 0, 
       graph = TRUE, 
-	xlab = "Matric suction (hPa)", 
-	ylab = expression(hPa^-1), 
+	xlab = "Matric head (cm)", 
+	ylab = expression(cm^-1), 
 	xlim1 = NULL,
 	xlim2 = NULL, 
 	xlim3 = NULL,

@@ -50,13 +50,13 @@ Silva et al. (1994). Characterization of the least limiting water range of soils
 \examples{
 # Example 1
 ex1 <- with(skp1994,
-    fitsoilwater4(theta = Water, psi = Potential, model = "Ross"))
+    fitsoilwater4(theta = W, psi = h, model = "Ross"))
 ex1
 summary(ex1)
 
 # Example 2
 ex2 <- with(skp1994,
-    fitsoilwater4(theta = Water, psi = Potential, Bd = BD, model = "Silva"))
+    fitsoilwater4(theta = W, psi = h, Bd = BD, model = "Silva"))
 ex2
 summary(ex2)
 

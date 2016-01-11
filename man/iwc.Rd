@@ -14,8 +14,8 @@ soil available water is also implemented here, according to Groenevelt et al. (2
 \usage{
 iwc(theta_R, theta_S, alpha, n, a, b, hos = 0, 
     graph = TRUE, 
-    xlab = "Matric suction (hPa)", 
-    ylab = expression(hPa^-1), 
+    xlab = "Matric head (cm)", 
+    ylab = expression(cm^-1), 
     xlim1 = NULL,
     xlim2 = NULL, 
     xlim3 = NULL,
@@ -35,7 +35,7 @@ iwc(theta_R, theta_S, alpha, n, a, b, hos = 0,
   \item{n}{ a shape parameter from van Genuchten's model; see details.}
   \item{a}{ a parameter of the soil penetration resistance model; see details.}
   \item{b}{ a parameter of the soil penetration resistance model; see details.}
-  \item{hos}{ optional; the value of osmotic suction of the saturated soil extract (hPa). Used only if one is 
+  \item{hos}{ optional; the value of osmotic head of the saturated soil extract (cm). Used only if one is 
 	concerned about the salinity effects on the water available for plants. Default is zero. 
 	See Groenevelt et al. (2004) for more details.}
   \item{graph}{logical; if TRUE (default), graphics for both dry and wet range are built.}
@@ -57,7 +57,7 @@ and \eqn{a} and \eqn{b} are the fitting parameters.
 }
 
 \value{
-A table containing each integration of IWC (integral water capacity) and EI (integral energy calculation).
+A table containing each integration of IWC (integral water capacity, in m/m) and EI (integral energy calculation, in J/kg).
 }
 
 \references{
