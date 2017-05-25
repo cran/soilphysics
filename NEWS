@@ -1,4 +1,14 @@
 ------------------------------------------------
+                version 3.1
+
+* Documentation fixes
+* New functions: stressTraffic(), for predicting the 
+  applied stress in the soil profile; soilStrength(),
+  for predicting load bearing capacity; llwrPTF() and soilDeformation()
+* Output "LLWR" of llwr() fixed
+* New reference for citation()
+
+------------------------------------------------
                 version 3.0
 
 * Documentation fixes

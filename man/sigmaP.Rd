@@ -41,7 +41,7 @@ as described by Dias Junior & Pierce (1995). \code{pacheco} is the method of Pac
 
 You may follow the flowchart below to understand the determination of the preconsolidation stress through \code{sigmaP()}.
 
-\figure{sigmaPfluxo.jpg}{options: scale = 1}
+\figure{sigmaPfluxo.jpg}{options: scale = 0.7}
 }
 
 \value{

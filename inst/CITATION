@@ -36,3 +36,20 @@ citEntry(entry="Article",
                "120: 63-71.",
                sep="")
          )
+
+citEntry(entry="Article",
+	title = "Determination of maximum curvature point with the R package soilphysics", 
+	author = personList(as.person("A. R. da Silva"), 
+	as.person("R. P. de Lima")),
+	journal = "International Journal of Current Research",
+  	year = "2017",
+	volume = "9",
+	pages = "xx-yy",       
+        textVersion = 
+        paste("da Silva, A.R.; de Lima, R.P. ",
+	       "(2017) ", 
+               "Determination of maximum curvature point with the R package soilphysics ",
+               "International Journal of Current Research, ",
+               "9: 45241-45245.",
+               sep="")
+         )

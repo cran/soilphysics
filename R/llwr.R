@@ -74,8 +74,7 @@ function (theta, h, Bd, Pr,
         thetaPR. <- (PRc/(b[1] * x.^b[3]))^(1/b[2])
         mi <- which.min((thetaA. - thetaPR.)^2)
         x <- seq(range(Bd)[1], x.[mi], length.out = 100)
-    }
-    else {
+    } else {
         x <- Bd
     }
     # defining LLWR ----------------------------------------
@@ -86,6 +85,15 @@ function (theta, h, Bd, Pr,
         exp(a[1] + a[2] * x) * h.WP^a[3])
     yLow <- apply(yLow., 1, max)
     iho <- as.vector(yUp - yLow)
+    # defining LLWR for observations only ------------------
+    yUp.Bd <- cbind(1 - Bd/Dp - air, 
+        exp(a[1] + a[2] * Bd) * h.FC^a[3])
+    yUpBd <- apply(yUp.Bd, 1, min)
+    yLow.Bd <- cbind((PRc/(b[1] * Bd^b[3]))^(1/b[2]), 
+        exp(a[1] + a[2] * Bd) * h.WP^a[3])
+    yLowBd <- apply(yLow.Bd, 1, max)
+    ihoBd <- as.vector(yUpBd - yLowBd)
+    ihoBd[ihoBd < 0] <- 0
     # graph ------------------------------------------------
     if (graph) {
         if (length(unique(Bd)) > 1L) {
@@ -112,7 +120,7 @@ function (theta, h, Bd, Pr,
             if (graph2) {
                 dev.new(width = 3, height = 3)
                 plot(x, yUp - yLow, type = "l", xlab = xlab, 
-                  ylab = "LLWR", ...)
+                  ylab = ylab, ...)
             }
         }
         else {
@@ -137,7 +145,7 @@ function (theta, h, Bd, Pr,
         pars.Pr = if (is.null(pars.Pr)) fit2 else b, 
         r.squared.Pr = if (is.null(pars.Pr)) rsq2, 
         area = if (length(unique(Bd)) > 1L) area, 
-        LLWR = if (length(unique(Bd)) == 1L) iho)
+        LLWR = if (length(unique(Bd)) > 1L) ihoBd else iho)
     class(out) <- "llwr"
     return(out)
 }
