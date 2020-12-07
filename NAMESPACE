@@ -30,12 +30,46 @@ export(simSigmaP)
 export(plotCIsigmaP)
 export(stressTraffic)
 export(soilStrength)
+export(soilStrength2)
+export(soilStrength3)
+export(soilStrength4)
+export(soilStrength5)
 export(soilDeformation)
 export(llwrPTF)
+export(particle.sedimentation)
+export(aggreg.stability)
+export(r)
+export(psd)
+export(Kr_h)
+export(Kr_theta)
+export(llwr_llmpr)
+export(hydraulicCutOff2)
+export(compressive_properties)
+export(compressive_properties2)
+export(compressive_properties3)
+export(compressive_properties4)
+export(compressive_properties5)
+export(particle.sedimentation_App)
+export(r_App)
+export(aggreg.stability_App)
+export(LLWR_LLMPR_App)
+export(PredComp)
+export(LLWR_App)
 
 # Imports
-import(utils, rpanel, tkrplot, MASS, boot, stats, graphics, grDevices, datasets)
-importFrom(tcltk, tkProgressBar, setTkProgressBar)
+import("shiny", "MASS", "boot", "grDevices", "datasets")
+importFrom("tcltk", "tkProgressBar", "setTkProgressBar")
+importFrom("shinydashboard", "box")
+importFrom("fields", "image.plot")
+importFrom("graphics", "abline", "arrows", "axis", "barplot",
+             "contour", "curve", "layout", "legend", "lines", "mtext",
+             "par", "plot", "points", "polygon", "segments", "text")
+importFrom("stats", "as.formula", "coef", "deriv3", "getInitial",
+             "integrate", "lm", "nls", "optimize", "predict", "quantile",
+             "resid", "sd", "sortedXyData", "vcov", "weighted.mean",
+             "weights")
+importFrom("utils", "head", "setTxtProgressBar", "tail",
+             "txtProgressBar", "write.csv")
 
 # S3method
 S3method(print, criticalmoisture)

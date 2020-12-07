@@ -48,6 +48,7 @@ Silva et al. (1994). Characterization of the least limiting water range of soils
 }
 
 \examples{
+data(skp1994)
 # Example 1
 ex1 <- with(skp1994,
     fitsoilwater4(theta = W, psi = h, model = "Ross"))

@@ -1,7 +1,7 @@
 \name{hydraulicCutOff}
 \alias{hydraulicCutOff}
 
-\title{Pore Water Suction at the Point of Hydraulic Cut-Off}
+\title{The matric potential at the point of hydraulic cut-off obtained from DE (Dexter et al., 2008) and GG (Groenevelt & Grant, 2004) water retention curves.}
 
 \description{
 The pore water suction at the point of hydraulic cut-off occurs at the point where the residual 

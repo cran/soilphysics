@@ -127,13 +127,13 @@ ex1 <- with(skp1994,
 ex1
 
 # Example 2 - specifying the parameters (Leao et al., 2005)
-a <- c(-0.9175, -0.3027, -0.0835)  # Silva et al. model of water content
+a <- c(-0.9175, -0.3027, -0.0835) # Silva et al. model of water content
 b <- c(0.0827, -1.6087, 3.0570)   # Busscher's model
 ex2 <- with(skp1994,
 	llwr(theta = W, h = h, Bd = BD, Pr = PR,
 		particle.density = 2.65, air = 0.1,
-		critical.PR = 2, h.FC = 100, h.WP = 15000,
-		pars.water = a, pars.busscher = b))
+		critical.PR = 2, h.FC = 0.1, h.WP = 1.5,
+		pars.water = a, pars.Pr = b))
 ex2
 
 # Example 3 - specifying a single value for Bd

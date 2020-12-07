@@ -31,10 +31,10 @@ stressTraffic(inflation.pressure, recommended.pressure, tyre.diameter,
 A list of
   \item{Area}{ Contact area parameters.}
   \item{Loads}{ Estimated wheel loads.}
-  \item{Stress}{ Stress propagation into soil.}
+  \item{Stress}{ Stress propagation into soil; sigma_vertical: vertical stress; sigma_mean: mean normal stress}
   \item{stress.matrix}{ The matrix of applied stress at a specific depth and radial distance from the tyre centre.}
   \item{fZStress}{ The function of stress propagation in z direction (vertical stress).}
-  \item{fmeanStress}{ The function of normal mean stress propagation.}
+  \item{fmeanStress}{ The function of mean normal stress propagation.}
   \item{fStress}{ The function of stress propagation.}
   \item{fXStress}{ The function of stress propagation in x (footprint length or driving) direction.}
   \item{fYStress}{ The function of stress propagation in y (tire width) direction.}
@@ -79,7 +79,7 @@ stress
 
 # Stress Propagation 
 # Vertical Stress
-stress.v <- stress$Stress$Zstress
+stress.v <- stress$Stress$sigma_vertical
 layers <- stress$Stress$Layers
 plot(x = 1, y = 1, xlim=c(0,300),ylim=c(1,0),xaxt = "n",
      ylab = "Soil Depth",xlab ="", type="l", main="")
@@ -88,7 +88,7 @@ mtext("Stress (kPa)",side=3,line=2.5)
 lines(x=stress.v, y=layers)
 
 # Mean normal stress
-stress.p <- stress$Stress$p
+stress.p <- stress$Stress$sigma_mean
 lines(x=stress.p, y=layers, lty=2)
 legend("bottomright", c("Vertical stress", "Normal mean stress"), lty = 1:2)
 
