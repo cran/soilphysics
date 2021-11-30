@@ -1,8 +1,8 @@
-c316cee22d84f0dc9812f8228399d8a4 *DESCRIPTION
-5c89959025689fd0f03efa9649dcc909 *NAMESPACE
-97c9a8fdaaade48ec7fb8f256482489d *NEWS
+944f813da00605e1a9a0be2c66347dbd *DESCRIPTION
+263954447eaef2b6bbdd9e0783223b37 *NAMESPACE
+dfd2314da8ce8bf9565a21e3f34dbc1d *NEWS
 3f27d9d10bcfd09b7499594a759fe966 *R/Kr_h.R
-acaee4eaa781bea2b9b3f98f41a80e47 *R/Kr_theta.R
+b28880532e008f3348229b20bad6a248 *R/Kr_theta.R
 0a8abd4eae1e1fe578eda0f38932ca80 *R/LLWR_App.R
 ec13d9f60894436265a3f308d133a3a7 *R/LLWR_LLMPR_App.R
 0747e480bb78ff87c87b03710059cd56 *R/PredComp.R
@@ -24,6 +24,7 @@ b4e1200b36c25c6dc4f9da0a6a5ca744 *R/fitlbc.R
 962169fee98b64f55e80e5354dc80eae *R/fitsoilwater3.R
 f2543331be15efca3be412fdcf471352 *R/fitsoilwater4.R
 af616dbb537e07c2fdb805fc0d3b3f28 *R/fitsoilwater5.R
+c7812052530aaeea831776f52f34fd07 *R/fitsoilwater_App.r
 fe24cb75fa0304d13845d1cacb37ea6a *R/fun2form.R
 6eb9a5823a9f3137a604278e584a3111 *R/getInitiallbc.R
 a829be9912fd2a60695c65ca1e70846f *R/hemc.R
@@ -35,7 +36,7 @@ aa634dfac6d2da3311062bae26dae3e3 *R/llwr.R
 a725e13fab26cac3b94deabe29c7afd7 *R/llwrPTF.R
 efdd1b95050da44c9ebe504a421a7ded *R/llwr_llmpr.R
 88d95f7db28997abb299aa7a62d2a7ac *R/maxcurv.R
-68586ef6ad2bf61e7ae0cf6f13fbb917 *R/onload.R
+f11e0347e193f0fd2b2c36c01856157e *R/onload.R
 0adb8c1effa5e488593261e7c3954d11 *R/particle.sedimentation.R
 6a74f594c0e1259e514f47b94dd8bdd4 *R/particle.sedimentation_App.R
 9ba442cd2dd50cef6e74edbfa9b6f018 *R/plotCIsigmaP.R
@@ -57,17 +58,17 @@ efab5ce994dd19374ca0dd825d2c2f34 *R/soilwater.R
 c9544049d5926d9f06bef79ecc786100 *R/soilwater5.R
 ebe05dda11290be29d3ad67b9c043234 *R/stressTraffic.R
 fe45aa5ac928109f46ca6e944b28dde8 *R/voidratio.r
-d1d0a03182f446d5ca4de08f3948471e *build/vignette.rds
+8e5bb0799302f5b08e7e87a4a7621136 *build/vignette.rds
 1f83924fffd686f31153e40506d25f96 *data/SoilAggregate.rda
 7bf41bd711fc2f8ac4031e127df2b1bb *data/bulkDensity.rda
 08707bb1ccda86e299d5f46281c0048a *data/compaction.rda
 4774b8600bc27ce787912d05c551c617 *data/skp1994.rda
 fb6372075c2edecf972722337b398022 *inst/CITATION
-bab7a72018da1f0ae0d9c9290abbe361 *inst/doc/vignette.R
-4e9c6cee247b95a3b6f98d3986db300a *inst/doc/vignette.Rmd
-85a63896182463ec9617857a311d0fe1 *inst/doc/vignette.html
+5fe4e7ba69d2b2aadbc3c1867acf540f *inst/doc/vignette.R
+4c271575f97e2ac657a0bfa30e54d2f7 *inst/doc/vignette.Rmd
+02554215da38abab7e7646e43d437b89 *inst/doc/vignette.html
 29b8c06f35cdc14bd5479b11a9cc5652 *man/Kr_h.Rd
-465f608e42ae5e2f7bb971f8d65b62a7 *man/Kr_theta.Rd
+335ef550ca39ea83487e039c46e07247 *man/Kr_theta.Rd
 aa05f93cb6eb72daf59542478b36a6d9 *man/LLWR_App.Rd
 7314cdf53934ac6379104002b9d7f60f *man/LLWR_LLMPR_App.Rd
 5876273c71dfbac2411f294e3093217f *man/PredComp.Rd
@@ -101,6 +102,7 @@ fe29d1bd70c46006b6fbbeaaf4706ecc *man/fitsoilwater2.Rd
 8cd0438211194b9ef7b32139ca559679 *man/fitsoilwater3.Rd
 206e508b32bb7bc566fcead01b17ac8b *man/fitsoilwater4.Rd
 b80da5a9372fe04a7e607d621b7882c5 *man/fitsoilwater5.Rd
+927a0b1514e05a1576fb15a1e3b7a89f *man/fitsoilwater_App.Rd
 9b48374744b337bb121194559bf9e937 *man/fun2form.Rd
 9717e4423edfdbea0c423b245927bc49 *man/getInitiallbc.Rd
 b2feeab7fcfa7f85c13e4da06d22e981 *man/hemc.Rd
@@ -115,7 +117,7 @@ c8795e5e8136afb83e1c8d8c92875545 *man/llwr_llmpr.Rd
 4a80a419df897310ef780579d8039191 *man/particle.sedimentation.Rd
 d65b9e6d44dad12ea8b53f02a3dae163 *man/particle.sedimentation_App.Rd
 2b4a3117766f66b85e6dca0cc9faebe1 *man/plotCIsigmaP.Rd
-72acb73a0bcc368443ab4368e80949d0 *man/psd.Rd
+5d6ec01cfd5fd0e01da6772b091545c0 *man/psd.Rd
 dac87da62613f1259a1e55faa855602b *man/r.Rd
 f6879c0bf7ac0a84d245dd6c93dcb04e *man/r_App.Rd
 28bc36ecb2c1d7590a3526b3d09e5a29 *man/sigmaP.Rd
@@ -127,7 +129,7 @@ c3a2b8085fb4e926c581953f3bec5358 *man/skp1994.Rd
 efc4d462ed776611ad9e65aef0766c59 *man/soilStrength3.Rd
 f9bc36ed7492ff1544c8d581faa5df63 *man/soilStrength4.Rd
 a45941ec84497b7bfd61f4ecd4a3403e *man/soilStrength5.Rd
-6d7a04ea04939336788b8512425b5e80 *man/soilphysics-package.Rd
+4257a52ef35fb055da7a86cffbc4ee29 *man/soilphysics-package.Rd
 de9c4f2d7e23d911cea22b22017ae6c5 *man/soilwater.Rd
 2b7dd823e160c81c78faafe039b88ba0 *man/soilwater2.Rd
 1add499ea02748c1fac20f28d358a5d8 *man/soilwater3.Rd
@@ -135,4 +137,4 @@ e0493b432b0d6c8e4d68c9d1049eaf3a *man/soilwater4.Rd
 db52195b26217ab83263df1f06b9e15d *man/soilwater5.Rd
 14405c687a755631f3a24e48a12720a8 *man/stressTraffic.Rd
 54e1e6c22a7a76b30a8a5702cd8d9e89 *man/voidratio.Rd
-4e9c6cee247b95a3b6f98d3986db300a *vignettes/vignette.Rmd
+4c271575f97e2ac657a0bfa30e54d2f7 *vignettes/vignette.Rmd

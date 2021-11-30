@@ -1,8 +1,8 @@
 Package: soilphysics
 Type: Package
 Title: Soil Physical Analysis
-Version: 4.0
-Date: 2020-12-06
+Version: 4.1
+Date: 2021-11-21
 Description: Basic and model-based soil physical analyses.
 Authors@R: c(person(given = c("Anderson", "Rodrigo"),
              family = "da Silva",
@@ -21,10 +21,10 @@ Maintainer: Anderson Rodrigo da Silva <anderson.agro@hotmail.com>
 URL: https://arsilva87.github.io/soilphysics/
 Imports: utils, stats, graphics, boot, grDevices, datasets, MASS,
         shiny, shinydashboard, fields
-Suggests: knitr, rmarkdown, rpanel, tcltk, tkrplot
+Suggests: knitr, rmarkdown, rpanel, tcltk
 VignetteBuilder: knitr
 License: GPL (>= 2)
 NeedsCompilation: no
-Packaged: 2020-12-07 00:25:46 UTC; ander
+Packaged: 2021-11-21 11:41:00 UTC; User
 Repository: CRAN
-Date/Publication: 2020-12-07 05:20:03 UTC
+Date/Publication: 2021-11-30 09:50:02 UTC
