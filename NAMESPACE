@@ -56,21 +56,23 @@ export(LLWR_LLMPR_App)
 export(PredComp)
 export(LLWR_App)
 export(fitsoilwater_App)
+export(WRC_App)
 
 # Imports
-import("shiny", "MASS", "boot", "grDevices", "datasets")
+import("shiny", "rhandsontable", "MASS", "boot", "grDevices", "datasets")
 importFrom("tcltk", "tkProgressBar", "setTkProgressBar")
-importFrom("shinydashboard", "box")
+importFrom("shinydashboard", "box", "dashboardPage", "dashboardHeader", 
+	"dashboardSidebar", "sidebarMenu", "menuItem", "dashboardBody", "tabBox")
 importFrom("fields", "image.plot")
 importFrom("graphics", "abline", "arrows", "axis", "barplot",
              "contour", "curve", "layout", "legend", "lines", "mtext",
-             "par", "plot", "points", "polygon", "segments", "text")
+             "par", "plot", "points", "polygon", "segments", "text", "title")
 importFrom("stats", "as.formula", "coef", "deriv3", "getInitial",
              "integrate", "lm", "nls", "optimize", "predict", "quantile",
              "resid", "sd", "sortedXyData", "vcov", "weighted.mean",
-             "weights", "AIC", "residuals")
+             "weights", "AIC", "residuals", "dnorm", "optim", "complete.cases")
 importFrom("utils", "head", "setTxtProgressBar", "tail",
-             "txtProgressBar", "write.csv", "read.csv")
+             "txtProgressBar", "write.csv", "read.csv", "read.csv2")
 
 # S3method
 S3method(print, criticalmoisture)
