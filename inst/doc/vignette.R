@@ -5,11 +5,11 @@ knitr::opts_chunk$set(
 )
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  install.packages("soilphysics")
+# install.packages("soilphysics")
 
-## ---- eval=FALSE--------------------------------------------------------------
-#  install.packages("devtools")
-#  devtools::install_github("arsilva87/soilphysics")
+## ----eval=FALSE---------------------------------------------------------------
+# install.packages("devtools")
+# devtools::install_github("arsilva87/soilphysics")
 
 ## ----warning=FALSE------------------------------------------------------------
 library(soilphysics) 
@@ -74,7 +74,7 @@ pres <- c(1, 12.5, 25, 50, 100, 200, 400, 800, 1600)
 VR <- c(0.846, 0.829, 0.820, 0.802, 0.767, 0.717, 0.660, 0.595, 0.532)
 sigmaP(VR, pres, method = "casagrande", n4VCL = 2)
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 h <- c(0.001, 50.65, 293.77, 790.14, 992.74, 5065, 10130, 15195)
 w <- c(0.5650, 0.4013, 0.2502, 0.2324, 0.2307, 0.1926, 0.1812, 0.1730)
 # fitsoilwater(theta=w, x=h, ylim=c(0.1,0.6))  # requires rpanel

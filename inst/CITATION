@@ -1,73 +1,65 @@
 citHeader("To cite 'soilphysics' in publications use:")
 
-citEntry(entry="Article",
+bibentry(bibtype="Article",
 	title = "soilphysics: an R package to determine soil preconsolidation pressure",
-      author = personList(as.person("A. R. da Silva"), 
-         as.person("R. P. de Lima")),
+      author = c(person("A. R.", "da Silva"),
+         person("R. P.", "de Lima")),
 	journal = "Computers and Geosciences",
   	year = "2015",
 	volume = "84",
-	pages = "54-60",       
-        textVersion = 
+	pages = "54--60",
+        textVersion =
         paste("Da Silva, A.R.; De Lima, R.P. ",
-	       "(2015) ", 
+	       "(2015) ",
                "soilphysics: an R package to determine soil preconsolidation pressure. ",
                "Computers and Geosciences, ",
                "84: 54-60.",
                sep="")
          )
 
-citEntry(entry="Article",
-	title = "soilphysics: an R package for calculating soil water availability to plants by different soil physical indices", 
-	author = personList(as.person("R. P. de Lima"), 
-	as.person("A. R. da Silva"), 
-	as.person("A. P. da Silva"), 
-	as.person("T. P. Leao"), 
-	as.person("M. R. Mosaddeghi")),
-	journal = "Computers and Eletronics in Agriculture",
+bibentry(bibtype="Article",
+	title = "soilphysics: an R package for calculating soil water availability to plants by different soil physical indices",
+	author = c(
+	person("R. P.", "de Lima"),
+	person("A. R.", "da Silva"),
+	person("A. P.", "da Silva"),
+	person("T. P.", "Leao"),
+	person("M. R.", "Mosaddeghi")),
+	journal = "Computers and Electronics in Agriculture",
   	year = "2016",
 	volume = "120",
-	pages = "63-71",       
-        textVersion = 
+	pages = "63--71",
+        textVersion =
         paste("de Lima, R.P.; da Silva, A.R.; da Silva, A.P.; Leao, T.P.; Mosaddeghi, M.R. ",
-	       "(2016) ", 
+	       "(2016) ",
                "soilphysics: an R package for calculating soil water availability to plants by different soil physical indices. ",
-               "Computers and Eletronics in Agriculture, ",
+               "Computers and Electronics in Agriculture, ",
                "120: 63-71.",
                sep="")
          )
 
-citEntry(entry="Article",
-	title = "Determination of maximum curvature point with the R package soilphysics", 
-	author = personList(as.person("A. R. da Silva"), 
-	as.person("R. P. de Lima")),
-	journal = "International Journal of Current Research",
-  	year = "2017",
-	volume = "9",
-	pages = "xx-yy",       
-        textVersion = 
-        paste("Da Silva, A.R.; De Lima, R.P. ",
-	       "(2017) ", 
-               "Determination of maximum curvature point with the R package soilphysics ",
-               "International Journal of Current Research, ",
-               "9: 45241-45245.",
-               sep="")
-         )
-
-citEntry(entry="Article",
+bibentry(bibtype="Article",
 	title = "soilphysics: An R package for simulation of soil compaction induced by agricultural field traffic",
-      author = personList(as.person("R. P. de Lima"), 
-	as.person("A. R. da Silva"),
-	as.person("A. P. da Silva")),
+      author = c(person("R. P.", "de Lima"),
+	person("A. R.", "da Silva"),
+	person("A. P.", "da Silva")),
 	journal = "Soil and Tillage Research",
   	year = "2021",
 	volume = "206",
-	pages = "104824",       
-        textVersion = 
+	pages = "104824",
+        textVersion =
         paste("De Lima, R.P.; Da Silva, A.R.; Da Silva, A.P. ",
-	       "(2021) ", 
+	       "(2021) ",
                "soilphysics: An R package for simulation of soil compaction induced by agricultural field traffic. ",
                "Soil and Tillage Research, ",
                "206: 104824.",
                sep="")
          )
+
+bibentry(
+  bibtype = "Manual",
+  title = "soilphysics: Basic and model-based soil physical data analyses",
+  author =  c(person("A. R.", "da Silva"), person("R. P.", "de Lima")),
+  year = "2026",
+  note = "R package version 5.1"
+)
